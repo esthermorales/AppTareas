@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "477850927681",
+    "project_id": "apptareas-87508",
+    "storage_bucket": "apptareas-87508.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:477850927681:android:7af723af61fc773c9b7cc0",
+        "android_client_info": {
+          "package_name": "cat.copernic.apptareas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "477850927681-bdg9hpdep1rpo6e1neat9u1umoc8pub3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMu2ySiJzzHDEs8_Tu12ppEq60hWD8YM0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "477850927681-bdg9hpdep1rpo6e1neat9u1umoc8pub3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
