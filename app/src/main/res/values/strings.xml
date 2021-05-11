@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">AppTareas</string>
+    <string name="et_mail">Email</string>
+    <string name="et_password">Password</string>
+    <string name="et_registrate">¿Eres nuevo? Registrate</string>
+    <string name="btn_entrar">Entrar</string>
+    <string name="txt_olvidado">¿Has olvidado tu contraseña?</string>
+
+    <!--Main -->
+    <string name="msgVacio">"Llena el campo de email."</string>
 </resources>
