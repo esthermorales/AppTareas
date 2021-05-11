@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">AppTareas</string>
+    <string name="Bienvenid">Bienvenid@!</string>
+    <string name="idStringRegistrate">Regístrate</string>
+    <string name="idStingEmail">Email</string>
+    <string name="idEtEmail">Email</string>
+    <string name="IdpTEmail">Email</string>
+    <string name="idEtPass">Contraseña</string>
+    <string name="idEtConfCont">Confirmar contraseña</string>
+    <string name="idCheck">Estoy de acuerdo con la LOPD</string>
+    <string name="idBtnRegistrate">Registrarse</string>
 </resources>
