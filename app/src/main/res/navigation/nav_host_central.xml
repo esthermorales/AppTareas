@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_host_central"
+    app:startDestination="@id/home2">
+
+    <fragment
+        android:id="@+id/home2"
+        android:name="cat.copernic.apptareas.UI.home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_tareas"
+            app:destination="@id/tareas" />
+        <action
+            android:id="@+id/action_home2_to_verUsuario"
+            app:destination="@id/verUsuario" />
+    </fragment>
+    <fragment
+        android:id="@+id/verUsuario"
+        android:name="cat.copernic.apptareas.UI.VerUsuario"
+        android:label="fragment_ver_usuario"
+        tools:layout="@layout/fragment_ver_usuario" />
+    <fragment
+        android:id="@+id/tareas"
+        android:name="cat.copernic.apptareas.UI.tareas"
+        android:label="fragment_tareas"
+        tools:layout="@layout/fragment_tareas" />
+</navigation>
