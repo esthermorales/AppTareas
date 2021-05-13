@@ -55,7 +55,7 @@ class Registro : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = mAuth!!.currentUser
                     updateUI(user)
-                    mensajeEmergente("Información", "Registrado correctamente")
+                    mensajeEmergente("Información", "Te has registrado correctaete.")
 
                 } else {
                     mensajeEmergente("Error", "Error en la autentificación")
