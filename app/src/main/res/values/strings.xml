@@ -16,4 +16,12 @@
     <string name="idBtnRegistrate">Registrarse</string>
     <!--Main -->
     <string name="msgVacio">"Llena el campo de email."</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- Editar usuario -->
+    <string name="lvNombre">Nommbre</string>
+    <string name="lvEmail">Correo electronico</string>
+    <string name="lvContraseña">Contraseña</string>
 </resources>
