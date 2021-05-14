@@ -9,10 +9,11 @@
     <string name="idStringRegistrate">Regístrate</string>
     <string name="idStingEmail">Email</string>
     <string name="idEtEmail">Email</string>
-    <string name="IdpTEmail">Email</string>
+    <string name="IdpTEmail">Dirección de correo</string>
     <string name="idEtPass">Contraseña</string>
     <string name="idEtConfCont">Confirmar contraseña</string>
-    <string name="idCheck">Estoy de acuerdo con la LOPD</string>
+    <string name="idCheck">Estoy de acuerdo con la </string>
+    <string name="txtLOPD">LOPD</string>
     <string name="idBtnRegistrate">Registrarse</string>
     <!--Main -->
     <string name="msgVacio">"Llena el campo de email."</string>
@@ -21,7 +22,7 @@
 
 
     <!-- Editar usuario -->
-    <string name="lvNombre">Nommbre</string>
+    <string name="lvNombre">Nombre</string>
     <string name="lvEmail">Correo electronico</string>
     <string name="lvContraseña">Contraseña</string>
     <string name="elmntTxt">Elemento</string>
@@ -30,4 +31,7 @@
     <string name="btnDescrp">Subir</string>
     <string name="btnDescrpb">Bajar</string>
     <string name="btnDescrpDel">Eliminar</string>
+    <string name="slogantxt">La app del desorden organizado</string>
+    <string name="txtInfo">¿Ya tienes una cuenta?</string>
+    <string name="txtEntrar">Entrar</string>
 </resources>
