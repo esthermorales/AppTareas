@@ -95,6 +95,16 @@ class MainActivity : AppCompatActivity() {
         for(elemento in lista.elementos as ArrayList<ElementoTarea>){
             Log.e("Jose", "-->" + elemento.toString())
         }
+
+        //Eliminar elemento
+        Log.e("Jose","Eliminar elemento")
+
+        lista.eliminarElemento(1)
+
+        for(elemento in lista.elementos as ArrayList<ElementoTarea>){
+            Log.e("Jose", "-->" + elemento.toString())
+        }
+
         //*************************************************
         //*************************************************
         //*************************************************

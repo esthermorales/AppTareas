@@ -69,4 +69,18 @@ class ListaTareas (
         }
     }
 
+    /**
+     * Elimina un elemento de una determinada posicion
+     */
+    fun eliminarElemento(posicion: Int){
+        if(elementos!!.size > 0 && posicion <= elementos!!.size && posicion >= 0)
+            elementos!!.removeAt(posicion)
+    }
+
+    //Añade un elemento
+    fun anyadirElemento(elemento: ElementoTarea){
+        elementos!!.add(elemento)
+        elementos!!.sort()
+    }
+
 }
