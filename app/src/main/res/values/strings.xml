@@ -24,4 +24,10 @@
     <string name="lvNombre">Nommbre</string>
     <string name="lvEmail">Correo electronico</string>
     <string name="lvContraseña">Contraseña</string>
+    <string name="elmntTxt">Elemento</string>
+    <string name="vacio" />
+    <string name="txtEdit">Editar Elemento</string>
+    <string name="btnDescrp">Subir</string>
+    <string name="btnDescrpb">Bajar</string>
+    <string name="btnDescrpDel">Eliminar</string>
 </resources>

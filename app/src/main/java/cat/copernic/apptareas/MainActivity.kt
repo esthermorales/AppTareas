@@ -16,6 +16,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import android.text.TextUtils
 import android.widget.Button
+import cat.copernic.apptareas.Modelos.ElementoTarea
+import cat.copernic.apptareas.Modelos.ListaTareas
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -46,6 +48,57 @@ class MainActivity : AppCompatActivity() {
     /* ja hem inicialitzat el layout però no és visible */
     override fun onStart() {
         super.onStart()
+        //************************************************
+        //****** Zona para testeos de clases *************
+        //************************************************
+
+        var lista = ListaTareas(2,"Test", "Cat",null,null,null)
+
+        lista.categoria = "hola"
+
+        Log.e("Jose",lista.toString())
+
+        var elemento1 = ElementoTarea(2, "Nombre 2", lista,2)
+        var elemento2 = ElementoTarea(6, "Nombre 6", lista,6)
+        var elemento3 = ElementoTarea(3, "Nombre 3", lista,3)
+        var elemento4 = ElementoTarea(7, "Nombre 7", lista,7)
+        var elemento5 = ElementoTarea(1, "Nombre 1", lista,1)
+
+        var elementos =  ArrayList<ElementoTarea>()
+        elementos.add(elemento1)
+        elementos.add(elemento2)
+        elementos.add(elemento3)
+        elementos.add(elemento4)
+        elementos.add(elemento5)
+
+        //elementos.sort()
+        /*for (elemento in elementos) {
+            Log.e("Jose",elemento.toString())
+
+        }*/
+        elementos.sort()
+        lista.elementos = elementos
+        for(elemento in lista.elementos as ArrayList<ElementoTarea>){
+            Log.e("Jose", "-->" + elemento.toString())
+        }
+        elementos.sort()
+        lista.subirElemento(5)
+        /*
+        Log.e("Jose","Subir elemento")
+        for(elemento in lista.elementos as ArrayList<ElementoTarea>){
+            Log.e("Jose", "-->" + elemento.toString())
+        }
+        */
+        Log.e("Jose","Bajar elemento")
+        lista.bajarElemento(0)
+
+        for(elemento in lista.elementos as ArrayList<ElementoTarea>){
+            Log.e("Jose", "-->" + elemento.toString())
+        }
+        //*************************************************
+        //*************************************************
+        //*************************************************
+
         // la variable currentUser tindrà l'usuari actual si està loginat, sinò serà null.
         val currentUser = auth.currentUser
         if (currentUser != null) {
