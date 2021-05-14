@@ -7,7 +7,7 @@ class ListaTareas (
     var categoria: String,
     var elementos: ArrayList<ElementoTarea>? = null,
     var propietario: Usuario? = null,
-    var compartido: List<Usuario>? = null
+    var compartido: ArrayList<Usuario>? = null
 ) : Comparable<ListaTareas>{
     init {
         //Al iniciar si elementos no esta en null ordena la lista.
@@ -83,4 +83,21 @@ class ListaTareas (
         elementos!!.sort()
     }
 
+    /**
+     * Añade un usuario
+     * Siempre que no sea el mismo y no este ya en la lista
+     */
+    fun addUserCompartido(usuario: Usuario){
+        var encontrado = false
+        //Si no esta intentando compartir consigo mismo
+        if (!usuario.email.equals(propietario!!.email)){
+           for (usuarioLista in compartido!!){
+               if (usuarioLista.email.equals(usuario.email))
+                   encontrado = true
+           }
+            if (!encontrado){
+                compartido!!.add(usuario)
+            }
+        }
+    }
 }
