@@ -22,10 +22,5 @@ class home : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.addLista.setOnClickListener {
-            findNavController().navigate(R.id.action_home2_to_verUsuario)
-        }
-        super.onViewCreated(view, savedInstanceState)
-    }
+
 }
