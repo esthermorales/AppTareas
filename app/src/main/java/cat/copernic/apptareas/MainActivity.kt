@@ -18,6 +18,7 @@ import android.text.TextUtils
 import android.widget.Button
 import cat.copernic.apptareas.Modelos.ElementoTarea
 import cat.copernic.apptareas.Modelos.ListaTareas
+import cat.copernic.apptareas.UI.VistaUI
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -182,7 +183,7 @@ class MainActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
                     val user = auth.currentUser
-                    seHaLogueado(user)
+                    //seHaLogueado(user)
                     //---*--*------
 
                     //var operaciones: OperacionesDBFirebase_Perfil = OperacionesDBFirebase_Perfil()
@@ -192,6 +193,8 @@ class MainActivity : AppCompatActivity() {
 
                     //---*--*------
                     guardarPreferencias(user)
+                    val intent = Intent(this, VistaUI::class.java)
+                    startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, task.exception.toString(), task.exception)

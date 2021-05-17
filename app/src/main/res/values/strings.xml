@@ -34,4 +34,13 @@
     <string name="slogantxt">La app del desorden organizado</string>
     <string name="txtInfo">¿Ya tienes una cuenta?</string>
     <string name="txtEntrar">Entrar</string>
+    <string name="idAñadirTarea">Añadir Tarea</string>
+    <string name="idCompartir">Compartir Listas</string>
+    <string name="idSubtituloCompartir">Con quién quieres compartirla?</string>
+    <string name="idCompartirCon">Compartir con:</string>
+    <string name="idEmailEjemplo">email@email.com</string>
+    <string name="btnAceptar">Aceptar</string>
+    <string name="btnCancelar">Cancelar</string>
+    <string name="btnMas">+</string>
+    <string name="btnGuardar">Guardar</string>
 </resources>
