@@ -22,16 +22,15 @@ class Registro : AppCompatActivity() {
 
         binding.idBtnRegistro.setEnabled(false)
 
-       binding.idCheck.setOnClickListener{
-            if(binding.idCheck.isChecked){
-            binding.idBtnRegistro.setEnabled(true)
-          }else{
-               binding.idBtnRegistro.setEnabled(false)
-          }
-       }
+        binding.idCheck.setOnClickListener {
+            if (binding.idCheck.isChecked) {
+                binding.idBtnRegistro.setEnabled(true)
+            } else {
+                binding.idBtnRegistro.setEnabled(false)
+            }
+        }
 
         registreUsuari()
-
     }
 
     override fun onStart() {
@@ -45,41 +44,45 @@ class Registro : AppCompatActivity() {
         binding.idEtEmail.setText("")
         binding.idEtPassword.setText("")
         binding.idEtConfPass.setText("")
-
     }
 
-    fun createUserWithEmailAndPassword(email: String, passwordd: String){
+    fun createUserWithEmailAndPassword(email: String, passwordd: String) {
 
         mAuth!!.createUserWithEmailAndPassword(email, passwordd)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val user = mAuth!!.currentUser
                     updateUI(user)
-                    mensajeEmergente("Información", "Te has registrado correctaete.")
+                    mensajeEmergente("Información", "Te has registrado correctamente.")
 
                 } else {
                     mensajeEmergente("Error", "Error en la autentificación")
                     updateUI(null)
                 }
-
             }
     }
+    private fun registreUsuari() {
 
-    private fun registreUsuari(){
-
-
-        binding.idBtnRegistro.setOnClickListener(){
-            if(!binding.idEtEmail.text.isEmpty() && !binding.idEtPassword.text.isEmpty() && !binding.idEtConfPass.text.isEmpty()){
-                if(binding.idEtPassword.text.toString().equals(binding.idEtConfPass.text.toString())){
-                    if(binding.idEtPassword.text.toString().length>5){
-                        createUserWithEmailAndPassword(binding.idEtEmail.text.toString(), binding.idEtPassword.text.toString())
-               }else{
-                        mensajeEmergente("Error", "La contraseña tiene que contener mínimo 6 caracteres")
+     binding.idBtnRegistro.setOnClickListener() {
+      if (!binding.idEtEmail.text.isEmpty() && !binding.idEtPassword.text.isEmpty() && !binding.idEtConfPass.text.isEmpty()) {
+                if (binding.idEtPassword.text.toString()
+                        .equals(binding.idEtConfPass.text.toString())
+                ) {
+                    if (binding.idEtPassword.text.toString().length > 5) {
+                        createUserWithEmailAndPassword(
+                            binding.idEtEmail.text.toString(),
+                            binding.idEtPassword.text.toString()
+                        )
+                    } else {
+                        mensajeEmergente(
+                            "Error",
+                            "La contraseña tiene que contener mínimo 6 caracteres"
+                        )
                     }
-                }else{
+                } else {
                     mensajeEmergente("Error", "Las contraseñas no son iguales")
                 }
-            }else{
+            } else {
                 mensajeEmergente("Error", "Se tienen que llenar todos los campos")
             }
         }

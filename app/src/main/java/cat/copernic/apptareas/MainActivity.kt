@@ -42,6 +42,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 */
+        binding.idTvRegistrarse.setOnClickListener{
+            val intent = Intent(this, Registro::class.java)
+            startActivity(intent)
+        }
 
     }
 
