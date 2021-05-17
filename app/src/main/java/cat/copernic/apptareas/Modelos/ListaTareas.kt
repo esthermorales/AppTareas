@@ -1,17 +1,17 @@
 package cat.copernic.apptareas.Modelos
 
 
-class ListaTareas (
+class ListaTareas(
     val idLista: Int,
     var nombre: String,
     var categoria: String,
     var elementos: ArrayList<ElementoTarea>? = null,
     var propietario: Usuario? = null,
     var compartido: ArrayList<Usuario>? = null
-) : Comparable<ListaTareas>{
+) : Comparable<ListaTareas> {
     init {
         //Al iniciar si elementos no esta en null ordena la lista.
-        if (elementos != null){
+        if (elementos != null) {
             elementos!!.sort()
         }
     }
@@ -36,23 +36,24 @@ class ListaTareas (
      * CompareTo para poder ordenar por id
      */
     override fun compareTo(other: ListaTareas): Int {
-        if (this.idLista > other.idLista)  return 1
+        if (this.idLista > other.idLista) return 1
         else return -1
     }
 
-    fun subirElemento(posicion: Int){
+    fun subirElemento(posicion: Int) {
         //Si hay elementos, la posicion es mayor de 0 (que no este en el prier cuadro)
         //y que lal posicion no sea la ultima casilla
-        if(elementos!!.size > 0 && posicion > 0 && posicion < elementos!!.size){
-            cambiarPosicion(elementos!!.get(posicion), elementos!!.get(posicion -1))
+        if (elementos!!.size > 0 && posicion > 0 && posicion < elementos!!.size) {
+            cambiarPosicion(elementos!!.get(posicion), elementos!!.get(posicion - 1))
             elementos!!.sort()
         }
     }
-    fun bajarElemento(posicion: Int){
+
+    fun bajarElemento(posicion: Int) {
         //Si hay elementos, la posicion es mayor de 0 (que no este en el prier cuadro)
         //y que lal posicion no sea la ultima casilla
-        if(elementos!!.size > 0 && posicion >= 0 && posicion < elementos!!.size -1){
-            cambiarPosicion(elementos!!.get(posicion), elementos!!.get(posicion +1))
+        if (elementos!!.size > 0 && posicion >= 0 && posicion < elementos!!.size - 1) {
+            cambiarPosicion(elementos!!.get(posicion), elementos!!.get(posicion + 1))
             elementos!!.sort()
         }
     }
@@ -60,9 +61,9 @@ class ListaTareas (
     /**
      * cambia la posicion de dos elementos
      */
-    fun cambiarPosicion(primero: ElementoTarea, segundo: ElementoTarea){
+    fun cambiarPosicion(primero: ElementoTarea, segundo: ElementoTarea) {
         var tmp: Int = 0
-        if(primero != null && segundo != null){
+        if (primero != null && segundo != null) {
             tmp = primero.posicion
             primero.posicion = segundo.posicion
             segundo.posicion = tmp
@@ -72,13 +73,13 @@ class ListaTareas (
     /**
      * Elimina un elemento de una determinada posicion
      */
-    fun eliminarElemento(posicion: Int){
-        if(elementos!!.size > 0 && posicion <= elementos!!.size && posicion >= 0)
+    fun eliminarElemento(posicion: Int) {
+        if (elementos!!.size > 0 && posicion <= elementos!!.size && posicion >= 0)
             elementos!!.removeAt(posicion)
     }
 
     //Añade un elemento
-    fun anyadirElemento(elemento: ElementoTarea){
+    fun anyadirElemento(elemento: ElementoTarea) {
         elementos!!.add(elemento)
         elementos!!.sort()
     }
@@ -87,17 +88,29 @@ class ListaTareas (
      * Añade un usuario
      * Siempre que no sea el mismo y no este ya en la lista
      */
-    fun addUserCompartido(usuario: Usuario){
+    fun addUserCompartido(usuario: Usuario) {
         var encontrado = false
         //Si no esta intentando compartir consigo mismo
-        if (!usuario.email.equals(propietario!!.email)){
-           for (usuarioLista in compartido!!){
-               if (usuarioLista.email.equals(usuario.email))
-                   encontrado = true
-           }
-            if (!encontrado){
+        if (!usuario.email.equals(propietario!!.email)) {
+            for (usuarioLista in compartido!!) {
+                if (usuarioLista.email.equals(usuario.email))
+                    encontrado = true
+            }
+            if (!encontrado) {
                 compartido!!.add(usuario)
             }
         }
+    }
+
+    /**
+     * Pasa la instancia de esta clase a Map<String, Any?>
+     * no se pasan las listas de elemntos ni la lista de compartidos.
+     */
+    fun toMap(): Map<String, Any?> {
+        val ret: Map<String, Any?> = mapOf(
+            "idLista" to idLista, "nombre" to nombre,
+            "categoria" to categoria, "propietario" to propietario
+        )
+        return ret
     }
 }
