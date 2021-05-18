@@ -18,6 +18,7 @@ class VerUsuario : Fragment() {
 
     private lateinit var binding: FragmentVerUsuarioBinding
     var user = Firebase.auth.currentUser
+    lateinit var correo: String
     private var comprovaciones = Comprovaciones()
 
     override fun onCreateView(
@@ -31,37 +32,63 @@ class VerUsuario : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var continuar = true
+        var contraseña = true
+        var texto = ""
+        correo = user!!.email.toString()
+
+        updateUI()
         binding.guardarUsuario.setOnClickListener{
-            if (binding.editNombre.text.toString() == ""){
-                continuar = false
-            }
-
             if (!comprovaciones.validaCorreo(binding.editCorreo.text.toString())){
-                continuar = false
+                texto += "El correo electronico no es valido"
             }
-
 
             if(!comprovaciones.validaClave(binding.editPassword.text.toString())){
-                continuar = false
+                if (!texto.equals(""))
+                    texto += System.getProperty("line.separator")
+
+                texto += "La contraseña introducida no es valida"
+                contraseña = false
             }
 
-            if (continuar){
-                user!!.updatePassword(binding.editPassword.text.toString())
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            Log.d(ContentValues.TAG, "User password updated.")
-                        }
-                    }
-
+            if(!texto.equals("")){
+                missatgeEmergent(texto)
+            }else{
+                texto = "Tu nuevo correo es " + binding.editCorreo.text.toString()
+                missatgeEmergent(texto)
+                correo = binding.editCorreo.text.toString()
 
                 user!!.updateEmail(binding.editCorreo.text.toString())
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Log.d(ContentValues.TAG, "User email address updated.")
+                            texto = "Tu nuevo correo es " + binding.editCorreo.text.toString()
                         }
                     }
+
+                if (contraseña){
+                    user!!.updatePassword(binding.editPassword.text.toString())
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                Log.d(ContentValues.TAG, "User password updated.")
+                            }
+                        }
+                }
+
+                updateUI()
             }
         }
+    }
+
+    fun updateUI(){
+        binding.editCorreo.setText(correo)
+        binding.editPassword.setText("")
+    }
+
+    fun missatgeEmergent(missatge: String) {
+        val builder = android.app.AlertDialog.Builder(context)
+        builder.setTitle("Error")
+        builder.setMessage(missatge)
+        builder.setPositiveButton("Aceptar") { dialog, which -> }
+        val dialog: android.app.AlertDialog = builder.create()
+        dialog.show()
     }
 }
