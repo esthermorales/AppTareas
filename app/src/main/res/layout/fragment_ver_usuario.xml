@@ -104,7 +104,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="@string/btnGuardar"
-        app:backgroundTint="@color/azulApp"
+        app:backgroundTint="@null"
+        android:background="@drawable/boton_app"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editPassword" />

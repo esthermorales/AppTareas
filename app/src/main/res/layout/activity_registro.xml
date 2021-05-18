@@ -97,7 +97,8 @@
         android:layout_marginTop="28dp"
         android:text="@string/idBtnRegistrate"
         android:textColor="#EDE9E9"
-        android:backgroundTint="@color/azulApp"
+        app:backgroundTint="@null"
+        android:background="@drawable/boton_app"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idCheck" />
@@ -130,6 +131,8 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
         android:fontFamily="@font/asap_medium"
         android:text="@string/txtLOPD"
         android:textColor="@color/naranjaApp"
