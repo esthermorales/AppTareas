@@ -3,6 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/editUser"
-        android:title="@string/editPerfil" />
+        android:id="@+id/cierreSesion"
+        android:title="@string/logOut" />
 </menu>

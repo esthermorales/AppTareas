@@ -15,10 +15,10 @@
             app:destination="@id/tareas" />
         <action
             android:id="@+id/action_home2_to_verUsuario"
-            app:destination="@id/verUsuario" />
+            app:destination="@id/editUser" />
     </fragment>
     <fragment
-        android:id="@+id/verUsuario"
+        android:id="@+id/editUser"
         android:name="cat.copernic.apptareas.UI.VerUsuario"
         android:label="fragment_ver_usuario"
         tools:layout="@layout/fragment_ver_usuario" />

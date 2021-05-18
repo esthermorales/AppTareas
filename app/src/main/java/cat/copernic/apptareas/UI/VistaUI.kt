@@ -1,10 +1,15 @@
 package cat.copernic.apptareas.UI
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import cat.copernic.apptareas.MainActivity
 import cat.copernic.apptareas.R
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class VistaUI : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,15 +18,17 @@ class VistaUI : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menuu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menuu)
+        menuInflater.inflate(R.menu.menu_main, menuu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         var id = item.itemId
 
-        if (id == R.id.verUsuario){
-
+        if (id == R.id.cierreSesion){
+            Firebase.auth.signOut()
+            val toInit = Intent(this, MainActivity::class.java)
+            startActivity(toInit)
         }
         return super.onOptionsItemSelected(item)
     }

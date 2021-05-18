@@ -43,4 +43,6 @@
     <string name="btnCancelar">Cancelar</string>
     <string name="btnMas">+</string>
     <string name="btnGuardar">Guardar</string>
+    <string name="logOut">Cerrar sesión</string>
+    <string name="editPerfil">Editar perfil</string>
 </resources>

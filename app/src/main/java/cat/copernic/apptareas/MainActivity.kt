@@ -117,10 +117,9 @@ class MainActivity : AppCompatActivity() {
         // la variable currentUser tindrà l'usuari actual si està loginat, sinò serà null.
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            // obrim l'activity admin
-            //val toHome = Intent(this, ActivityCliente::class.java)
-
-            //startActivity(toHome)
+            // obrim l'activity principal
+            val intent = Intent(this, VistaUI::class.java)
+            startActivity(intent)
         }
     }
 
