@@ -97,7 +97,7 @@
         android:layout_marginTop="28dp"
         android:text="@string/idBtnRegistrate"
         android:textColor="#EDE9E9"
-        app:backgroundTint="@color/azulApp"
+        android:backgroundTint="@color/azulApp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idCheck" />

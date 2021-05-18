@@ -1,5 +1,8 @@
 package cat.copernic.apptareas
 
+
+
+import android.graphics.Color.parseColor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import cat.copernic.apptareas.databinding.ActivityRegistroBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.type.Color
 
 class Registro : AppCompatActivity() {
 
@@ -21,12 +25,18 @@ class Registro : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
 
         binding.idBtnRegistro.setEnabled(false)
+        binding.idBtnRegistro.setTextColor(parseColor("#9E9E9E"))//texto del botón en gris
+
 
         binding.idCheck.setOnClickListener {
             if (binding.idCheck.isChecked) {
                 binding.idBtnRegistro.setEnabled(true)
+                binding.idBtnRegistro.setTextColor(parseColor("#ffffff"))
+
+
             } else {
                 binding.idBtnRegistro.setEnabled(false)
+                binding.idBtnRegistro.setTextColor(parseColor("#9E9E9E"))
             }
         }
 
