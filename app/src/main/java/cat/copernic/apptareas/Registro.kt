@@ -2,7 +2,9 @@ package cat.copernic.apptareas
 
 
 
+import android.content.Intent
 import android.graphics.Color.parseColor
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -38,6 +40,13 @@ class Registro : AppCompatActivity() {
                 binding.idBtnRegistro.setEnabled(false)
                 binding.idBtnRegistro.setTextColor(parseColor("#9E9E9E"))
             }
+        }
+
+        binding.btnLey.setOnClickListener{
+            val url: String = "https://www.boe.es/buscar/pdf/2018/BOE-A-2018-16673-consolidado.pdf"
+            val uri: Uri = Uri.parse(url)
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
         }
 
         registreUsuari()
