@@ -16,8 +16,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import android.text.TextUtils
 import android.widget.Button
+import cat.copernic.apptareas.Datos.DBUsuario
 import cat.copernic.apptareas.Modelos.ElementoTarea
 import cat.copernic.apptareas.Modelos.ListaTareas
+import cat.copernic.apptareas.Modelos.Usuario
 import cat.copernic.apptareas.UI.VistaUI
 
 class MainActivity : AppCompatActivity() {
@@ -56,6 +58,9 @@ class MainActivity : AppCompatActivity() {
         //************************************************
         //****** Zona para testeos de clases *************
         //************************************************
+        val useeer = DBUsuario()
+        val pepito = Usuario("pepito@falso.es","Pepito ")
+        useeer.insertar(pepito)
 
         var lista = ListaTareas(2,"Test", "Cat",null,null,null)
 
