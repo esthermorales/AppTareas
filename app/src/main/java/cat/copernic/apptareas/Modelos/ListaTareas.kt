@@ -15,6 +15,7 @@ class ListaTareas(
             elementos!!.sort()
         }
     }
+
     /*
     idLista: Una id generada automaticamente con el número siguiente de la lista
     nombre: Nombre de la tarea
@@ -23,6 +24,14 @@ class ListaTareas(
     propietario: Usuario propietario, no puede ser null
     compartido: List<Usuario>, List de usuarios con los que esta compartido, puede ser null
    */
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Usuario
+        if (this.nombre.equals(other.nombre)) return true
+        else return false
+    }
 
 
     /**
@@ -90,26 +99,40 @@ class ListaTareas(
      */
     fun addUserCompartido(usuario: Usuario) {
         var encontrado = false
-        //Si no esta intentando compartir consigo mismo
-        if (!usuario.email.equals(propietario!!.email)) {
-            for (usuarioLista in compartido!!) {
-                if (usuarioLista.email.equals(usuario.email))
-                    encontrado = true
-            }
-            if (!encontrado) {
-                compartido!!.add(usuario)
+        //Si el propietario existe
+        if (propietario != null) {
+            //que no intente compartirlo consigo mismo
+            if (usuario.equals(propietario)) {
+                encontrado = true
+            } else if (compartido != null) {
+                //que el usuario con quien lo comparte no este en la lista
+                for (num in 0..compartido!!.size - 1) {
+                    if (compartido!!.get(num).equals(usuario))
+                        encontrado = true
+                }
             }
         }
+        if (!encontrado) {
+            //Si no se ha inicializado se inicia
+            if (compartido == null) {
+                compartido = ArrayList<Usuario>()
+            }
+            //se añade el usuario
+            compartido?.add(usuario)
+        }
+
+
     }
+
 
     /**
      * Pasa la instancia de esta clase a Map<String, Any?>
      * no se pasan las listas de elemntos ni la lista de compartidos.
      */
-    fun toMap(): Map<String, Any?> {
-        val ret: Map<String, Any?> = mapOf(
-            "idLista" to idLista, "nombre" to nombre,
-            "categoria" to categoria, "propietario" to propietario
+    fun toMap(): Map<String, String?> {
+        val ret: Map<String, String?> = mapOf(
+            "idLista" to idLista.toString(), "nombre" to nombre,
+            "categoria" to categoria, "propietario" to propietario?.email.toString()
         )
         return ret
     }

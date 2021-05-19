@@ -23,11 +23,11 @@ class ElementoTarea(
     /**
      * Pasa la instancia a Map<String, Any>
      */
-    fun toMap(): Map<String, Any> {
-        val ret: Map<String, Any> = mapOf(
-            "idElemento" to idElemento,
-            "tarea" to tarea, "subTarea" to subTarea, "posicion" to posicion,
-            "hecho" to hecho, "editable" to editable
+    fun toMap(): Map<String, String> {
+        val ret: Map<String, String> = mapOf(
+            "idElemento" to idElemento.toString(),
+            "tarea" to tarea, "subTarea" to subTarea.idLista.toString(), "posicion" to posicion.toString(),
+            "hecho" to hecho.toString(), "editable" to editable.toString()
         )
         return ret
     }
