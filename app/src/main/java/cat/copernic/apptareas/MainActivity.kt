@@ -16,17 +16,28 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import android.text.TextUtils
 import android.widget.Button
+import cat.copernic.apptareas.Datos.DBElementoTarea
+import cat.copernic.apptareas.Datos.DBListaTarea
 import cat.copernic.apptareas.Datos.DBUsuario
 import cat.copernic.apptareas.Modelos.ElementoTarea
 import cat.copernic.apptareas.Modelos.ListaTareas
 import cat.copernic.apptareas.Modelos.Usuario
 import cat.copernic.apptareas.UI.VistaUI
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.android.awaitFrame
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
-
-
+    //-- Esta variable se le tiene que pasar a DBUsuario para recuperar los datos de la db
+    //En el mismo instante no esta llena
+    var usuarios = ArrayList<Usuario>()
+    var listtar = ArrayList<ListaTareas>()
+    var elemnts = ArrayList<ElementoTarea>()
+    //--
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -55,10 +66,11 @@ class MainActivity : AppCompatActivity() {
     /* ja hem inicialitzat el layout però no és visible */
     override fun onStart() {
         super.onStart()
+
         //************************************************
         //****** Zona para testeos de clases *************
         //************************************************
-        val useeer = DBUsuario()
+        /*val useeer = DBUsuario()
         val pepito = Usuario("pepito@falso.es","Pepito ")
         useeer.insertar(pepito)
 
@@ -79,27 +91,27 @@ class MainActivity : AppCompatActivity() {
         elementos.add(elemento2)
         elementos.add(elemento3)
         elementos.add(elemento4)
-        elementos.add(elemento5)
+        elementos.add(elemento5)*/
 
         //elementos.sort()
         /*for (elemento in elementos) {
             Log.e("Jose",elemento.toString())
 
         }*/
-        elementos.sort()
+       /* elementos.sort()
         lista.elementos = elementos
         for(elemento in lista.elementos as ArrayList<ElementoTarea>){
             Log.e("Jose", "-->" + elemento.toString())
         }
         elementos.sort()
-        lista.subirElemento(5)
+        lista.subirElemento(5)*/
         /*
         Log.e("Jose","Subir elemento")
         for(elemento in lista.elementos as ArrayList<ElementoTarea>){
             Log.e("Jose", "-->" + elemento.toString())
         }
         */
-        Log.e("Jose","Bajar elemento")
+       /* Log.e("Jose","Bajar elemento")
         lista.bajarElemento(0)
 
         for(elemento in lista.elementos as ArrayList<ElementoTarea>){
@@ -113,7 +125,21 @@ class MainActivity : AppCompatActivity() {
 
         for(elemento in lista.elementos as ArrayList<ElementoTarea>){
             Log.e("Jose", "-->" + elemento.toString())
-        }
+        }*/
+        /*val usrdb = DBUsuario()
+        usrdb.recuperar(usuarios)*/
+
+        val tardb = DBListaTarea()
+        tardb.recuperar(listtar)
+
+        val dbelm = DBElementoTarea()
+        dbelm.recuperar(elemnts)
+
+
+
+
+
+
 
 
         //*************************************************

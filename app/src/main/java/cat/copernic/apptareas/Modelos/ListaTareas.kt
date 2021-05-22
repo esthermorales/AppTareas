@@ -16,20 +16,19 @@ class ListaTareas(
         }
     }
 
-    /*
-    idLista: Una id generada automaticamente con el número siguiente de la lista
-    nombre: Nombre de la tarea
-    categoria: Categoria de libre elección
-    List<ElementoTarea>: Lista de elmentos, puede estar vacio
-    propietario: Usuario propietario, no puede ser null
-    compartido: List<Usuario>, List de usuarios con los que esta compartido, puede ser null
-   */
+    /**
+     * Metodo para comparar la lista por el id
+     */
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
+        /*
         other as Usuario
         if (this.nombre.equals(other.nombre)) return true
+        else return false*/
+        other as ListaTareas
+        if(this.idLista == other.idLista) return true
         else return false
     }
 

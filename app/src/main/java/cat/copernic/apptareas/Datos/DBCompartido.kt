@@ -6,6 +6,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class DBCompartido {
     private val db = FirebaseFirestore.getInstance()
+
     /**
      * Guarda la instancia de los datos compartidos que se incluye en lista tareas
      *
@@ -21,4 +22,6 @@ class DBCompartido {
             }
         }
     }
+
+
 }
