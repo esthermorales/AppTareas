@@ -4,13 +4,18 @@ import android.util.Log
 import cat.copernic.apptareas.Modelos.ElementoTarea
 import cat.copernic.apptareas.Modelos.ListaTareas
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.Source
 
 class DBElementoTarea {
     private val db = FirebaseFirestore.getInstance()
     private val coleccion = db.collection("elemento")
     val listtar = ArrayList<ListaTareas>()
+    var ultimoNumero = 0
 
+    init {
+        actualizaUltimoNumero()
+    }
     /**
      * Inserta un elemento dentro de FireBase
      */
@@ -18,6 +23,7 @@ class DBElementoTarea {
 
     fun insertar(elemento: ElementoTarea) {
         db.collection("elemento").document(elemento.idElemento.toString()).set(elemento.toMap())
+        actualizaUltimoNumero()
     }
 
     /**
@@ -54,6 +60,19 @@ class DBElementoTarea {
 
         }
 
+    }
+
+    /**
+     * Recupera el último numero id
+     */
+    fun actualizaUltimoNumero(){
+        val doc = db.collection("elemento").orderBy("idElemento", Query.Direction.DESCENDING)
+            .limit(1).get().addOnSuccessListener {
+                it.forEach {
+                    if (it != null)
+                        ultimoNumero = (it.data.get("idElemento") as String).toInt()
+                }
+            }
     }
 
 

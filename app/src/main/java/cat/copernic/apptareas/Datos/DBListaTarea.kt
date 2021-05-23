@@ -3,17 +3,25 @@ package cat.copernic.apptareas.Datos
 import cat.copernic.apptareas.Modelos.ListaTareas
 import cat.copernic.apptareas.Modelos.Usuario
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.Source
 
 class DBListaTarea {
     private val db = FirebaseFirestore.getInstance()
     private val coleccion = db.collection("listaTareas")
     private val usuarios = ArrayList<Usuario>()
+    public var ultimoNumero = 0
     /**
      * Inserta una lista dentro de FireBase
      */
+    init {
+        //Actualiza el ultimo numero
+        actualizaUltimoNumero()
+    }
+
     fun insertar(lista: ListaTareas){
         db.collection("listaTareas").document(lista.idLista.toString()).set(lista.toMap())
+        actualizaUltimoNumero()
     }
 
     fun recuperar(lista: ArrayList<ListaTareas>){
@@ -38,4 +46,18 @@ class DBListaTarea {
             }
         }
     }
+
+    /**
+     * Recupera el último numero id
+     */
+    fun actualizaUltimoNumero(){
+        val doc = db.collection("listaTareas").orderBy("idLista", Query.Direction.DESCENDING)
+            .limit(1).get().addOnSuccessListener {
+                it.forEach {
+                    if (it != null)
+                        ultimoNumero = (it.data.get("idLista") as String).toInt()
+                }
+            }
+        }
+
 }
