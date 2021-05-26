@@ -38,7 +38,7 @@ class PopUpAñadirLista: DialogFragment() {
         _binding =FragmentAnadirListaBinding.inflate(inflater, container, false)
 
 
-        listaTareas=ListaTareas(7)
+        listaTareas=ListaTareas(12)
 
 
 
@@ -63,7 +63,7 @@ class PopUpAñadirLista: DialogFragment() {
 
                 //Toast.makeText(activity,"${dbLista.ultimoNumero}",Toast.LENGTH_LONG).show();
 
-               listaTareas.idLista=7
+               listaTareas.idLista=12
                 listaTareas.categoria = binding.editTextTextPersonName2.text.toString()
                 listaTareas.nombre = binding.editTextTextPersonName3.text.toString()
 
