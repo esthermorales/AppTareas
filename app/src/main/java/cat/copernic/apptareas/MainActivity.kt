@@ -98,42 +98,42 @@ class MainActivity : AppCompatActivity() {
             Log.e("Jose",elemento.toString())
 
         }*/
-       /* elementos.sort()
-        lista.elementos = elementos
-        for(elemento in lista.elementos as ArrayList<ElementoTarea>){
-            Log.e("Jose", "-->" + elemento.toString())
-        }
-        elementos.sort()
-        lista.subirElemento(5)*/
+        /* elementos.sort()
+         lista.elementos = elementos
+         for(elemento in lista.elementos as ArrayList<ElementoTarea>){
+             Log.e("Jose", "-->" + elemento.toString())
+         }
+         elementos.sort()
+         lista.subirElemento(5)*/
         /*
         Log.e("Jose","Subir elemento")
         for(elemento in lista.elementos as ArrayList<ElementoTarea>){
             Log.e("Jose", "-->" + elemento.toString())
         }
         */
-       /* Log.e("Jose","Bajar elemento")
-        lista.bajarElemento(0)
+        /* Log.e("Jose","Bajar elemento")
+         lista.bajarElemento(0)
 
-        for(elemento in lista.elementos as ArrayList<ElementoTarea>){
-            Log.e("Jose", "-->" + elemento.toString())
-        }
+         for(elemento in lista.elementos as ArrayList<ElementoTarea>){
+             Log.e("Jose", "-->" + elemento.toString())
+         }
 
-        //Eliminar elemento
-        Log.e("Jose","Eliminar elemento")
+         //Eliminar elemento
+         Log.e("Jose","Eliminar elemento")
 
-        lista.eliminarElemento(1)
+         lista.eliminarElemento(1)
 
-        for(elemento in lista.elementos as ArrayList<ElementoTarea>){
-            Log.e("Jose", "-->" + elemento.toString())
-        }*/
+         for(elemento in lista.elementos as ArrayList<ElementoTarea>){
+             Log.e("Jose", "-->" + elemento.toString())
+         }*/
         /*val usrdb = DBUsuario()
         usrdb.recuperar(usuarios)*/
 
-        val tardb = DBListaTarea()
-        tardb.recuperar(listtar)
+        // val tardb = DBListaTarea()
+        //  tardb.recuperar(listtar)
 
-        val dbelm = DBElementoTarea()
-        dbelm.recuperar(elemnts)
+        //  val dbelm = DBElementoTarea()
+        //  dbelm.recuperar(elemnts)
 
 
 
