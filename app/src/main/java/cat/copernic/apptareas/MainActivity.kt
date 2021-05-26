@@ -129,11 +129,11 @@ class MainActivity : AppCompatActivity() {
         /*val usrdb = DBUsuario()
         usrdb.recuperar(usuarios)*/
 
-        val tardb = DBListaTarea()
-        tardb.recuperar(listtar)
+       // val tardb = DBListaTarea()
+      //  tardb.recuperar(listtar)
 
-        val dbelm = DBElementoTarea()
-        dbelm.recuperar(elemnts)
+      //  val dbelm = DBElementoTarea()
+      //  dbelm.recuperar(elemnts)
 
 
 
