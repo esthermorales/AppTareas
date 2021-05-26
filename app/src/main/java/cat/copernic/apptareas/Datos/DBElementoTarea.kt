@@ -10,8 +10,9 @@ import com.google.firebase.firestore.Source
 class DBElementoTarea {
     private val db = FirebaseFirestore.getInstance()
     private val coleccion = db.collection("elemento")
-    val listtar = ArrayList<ListaTareas>()
-    var ultimoNumero = 0
+    private var listatarTmp = ArrayList<ListaTareas>()
+    private lateinit var  listatar: ArrayList<ListaTareas>
+    var ultimoNumero: Int = 0
 
     init {
         actualizaUltimoNumero()
@@ -29,23 +30,31 @@ class DBElementoTarea {
     /**
      * Recupera los dotos referentes a ElementoTarea de Firebase
      */
-    fun recuperar(list: ArrayList<ElementoTarea>) {
+    fun recuperar(list: ArrayList<ElementoTarea>,
+                  dostuff: (users: ArrayList<ElementoTarea>) -> Unit) {
         //BUSCAR LISTA EN DB
         val dblis = DBListaTarea()
-        dblis.recuperar(listtar)
+        //Recupera la lista de tareas
+        dblis.recuperar(listatarTmp, ::recuperarListaTareas)
         var tmp: ListaTareas = ListaTareas(0, "", "")
         coleccion.get(Source.CACHE).addOnSuccessListener {
+            println("------> Estoy aqui")
             for (document in it) {
-                val sub = document.data.get("subTarea") as String
-                /* TODO recuperar subtarea
-                for (subt in listtar) {
+                println("------> Y ahora aqui")
+                var sub: String = ""
+                //SI esxiste subtarea
+                if (document.data.get("subTarea") != null){
+                    sub = document.data.get("subTarea") as String
+                }
+
+                println("------> Now Here")
+                println(listatarTmp.size)
+                for (subt in listatar) {
                     if(subt != null && sub != null)
                     if (sub.toInt() == subt.idLista) {
                         tmp = subt
                     }
                 }
-                */
-
 
                 val elementoTmp = ElementoTarea(
                     (document.data.get("idElemento") as String).toInt(),
@@ -57,7 +66,8 @@ class DBElementoTarea {
                 )
                 list.add(elementoTmp)
             }
-
+            //Realiza la acción con el ArrayList<ElementoTarea>
+            dostuff(list)
         }
 
     }
@@ -73,6 +83,11 @@ class DBElementoTarea {
                         ultimoNumero = (it.data.get("idElemento") as String).toInt()
                 }
             }
+    }
+
+    fun recuperarListaTareas(lista: ArrayList<ListaTareas>){
+        listatar = ArrayList<ListaTareas>()
+        listatar= lista
     }
 
 

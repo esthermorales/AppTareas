@@ -25,7 +25,13 @@ class DBUsuario {
         db.collection("usuarios").document(usuario.email).set(usuario.toMap())
     }
 
-    fun recuperar(listaUsuarios: ArrayList<Usuario>) {
+    /**
+     * Recuperar usuarios
+     * Para poder utilizarlo hay que pasar un arrayList de usuario y
+     * la referencia a una funcion que recibe parametro ArrayList<Usuario>
+     */
+    fun recuperar(listaUsuarios: ArrayList<Usuario>,
+                  dostuff: (users: ArrayList<Usuario>) -> Unit) {
         //Recupera los datos del cache por si no tiene conexión
         coleccion.get(Source.CACHE).addOnSuccessListener {
             for (document in it){
@@ -34,7 +40,9 @@ class DBUsuario {
                 )
                 listaUsuarios.add(usrTmp)
             }
+            dostuff(listaUsuarios)
         }
+
     }
 
 
