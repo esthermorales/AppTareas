@@ -2,7 +2,6 @@ package cat.copernic.apptareas.UI
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,7 @@ class PopUpAñadirLista: DialogFragment() {
     private val binding get() = _binding!!
     lateinit  var listaTareas : ListaTareas
     var dbLista= DBListaTarea()
-    var cont=0
+
     //private var mDatabase: DatabaseReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,15 +34,15 @@ class PopUpAñadirLista: DialogFragment() {
     ): View? {
 
 
+
         _binding =FragmentAnadirListaBinding.inflate(inflater, container, false)
 
 
-        listaTareas=ListaTareas(dbLista.ultimoNumero)
+        listaTareas=ListaTareas(7)
 
 
 
         binding.idBtnAnadirL.setOnClickListener {
-
 
             if (binding.editTextTextPersonName2.equals("") || binding.editTextTextPersonName3.equals(
                     ""
@@ -59,10 +58,12 @@ class PopUpAñadirLista: DialogFragment() {
 
             } else {
 
+                print("ffffffffff")
+              //  dbLista.actualizaUltimoNumero (::ultimo)
 
-                Toast.makeText(activity,"${dbLista.ultimoNumero}",Toast.LENGTH_LONG).show();
+                //Toast.makeText(activity,"${dbLista.ultimoNumero}",Toast.LENGTH_LONG).show();
 
-               listaTareas.idLista=++dbLista.ultimoNumero
+               listaTareas.idLista=7
                 listaTareas.categoria = binding.editTextTextPersonName2.text.toString()
                 listaTareas.nombre = binding.editTextTextPersonName3.text.toString()
 
@@ -76,14 +77,15 @@ class PopUpAñadirLista: DialogFragment() {
             dismiss()
         }
 
-        val view = binding.root
+        var view= binding.root
         return view
+
     }
 
    /* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-   
+
 
         binding.idButonCancelar .setOnClickListener{
             dismiss()
@@ -93,5 +95,9 @@ class PopUpAñadirLista: DialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun ultimo(num:Int){
+        println("rrrrrkkkrr"+num)
     }
 }
