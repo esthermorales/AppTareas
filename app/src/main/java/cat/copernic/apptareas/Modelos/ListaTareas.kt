@@ -1,10 +1,10 @@
 package cat.copernic.apptareas.Modelos
 
 
-class ListaTareas(
-    val idLista: Int,
-    var nombre: String,
-    var categoria: String,
+    class ListaTareas(
+    var idLista: Int,
+    var nombre: String="",
+    var categoria: String="",
     var elementos: ArrayList<ElementoTarea>? = null,
     var propietario: Usuario? = null,
     var compartido: ArrayList<Usuario>? = null
@@ -14,9 +14,12 @@ class ListaTareas(
         if (elementos != null) {
             elementos!!.sort()
         }
+
     }
 
-    /**
+        //constructor() : this(idLista)
+
+        /**
      * Metodo para comparar la lista por el id
      */
     override fun equals(other: Any?): Boolean {

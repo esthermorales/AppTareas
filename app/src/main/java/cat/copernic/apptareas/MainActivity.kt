@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import android.text.TextUtils
+import android.widget.Button
 import cat.copernic.apptareas.Datos.DBElementoTarea
 import cat.copernic.apptareas.Datos.DBListaTarea
 import cat.copernic.apptareas.Datos.DBUsuario
@@ -22,6 +23,11 @@ import cat.copernic.apptareas.Modelos.ElementoTarea
 import cat.copernic.apptareas.Modelos.ListaTareas
 import cat.copernic.apptareas.Modelos.Usuario
 import cat.copernic.apptareas.UI.VistaUI
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.android.awaitFrame
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -40,7 +46,6 @@ class MainActivity : AppCompatActivity() {
         //Botones
         //binding.btnLogIn.setOnClickListener(this)
         binding.btnLogIn.setOnClickListener {
-
             //Llamada a metodos de los botones
             login(binding.txtEmail.text.toString(), binding.txtPass.text.toString())
         }
@@ -123,18 +128,24 @@ class MainActivity : AppCompatActivity() {
         }*/
         /*val usrdb = DBUsuario()
         usrdb.recuperar(usuarios)*/
-    /*
-        val recuperar = DBUsuario()
-        recuperar.recuperar(usuarios, ::mostrar)
 
-        val ultnum = DBListaTarea()
-        ultnum.actualizaUltimoNumero(::mostrarUltimoNum)
-*/
-        /*
-        val dbelt = DBElementoTarea()
-        dbelt.recuperar(elemnts, ::mostrarElementos)
+        val tardb = DBListaTarea()
+        tardb.recuperar(listtar)
 
-*/
+        val dbelm = DBElementoTarea()
+        dbelm.recuperar(elemnts)
+
+
+
+
+
+
+
+
+
+
+
+
         //*************************************************
         //*************************************************
         //*************************************************
@@ -147,18 +158,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-    fun mostrar(usuarios: ArrayList<Usuario>) {
-        println("Size: " + usuarios.size)
-    }
-    fun mostrarUltimoNum(num :Int){
-        println("---------------------> " + num)
-    }
 
-    fun mostrarElementos(elem: ArrayList<ElementoTarea>){
-        for (elemento in elem){
-            println("<--> "+ elemento.toString() +" <-->")
-        }
-    }
     /**
      * Comprueba que el usuario no ha dejado los campos en blanco
      * @return boleano si es correcto o no

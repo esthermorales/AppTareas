@@ -24,6 +24,16 @@ class home : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.addLista.setOnClickListener{
+            var dialog=PopUpAñadirLista()
+
+            getFragmentManager()?.let { it1 -> dialog.show(it1, "custom dialog") }
+        }
+
+    }
+
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         val setings = menu.findItem(R.id.cierreSesion)
