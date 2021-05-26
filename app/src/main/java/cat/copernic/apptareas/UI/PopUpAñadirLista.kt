@@ -59,7 +59,7 @@ class PopUpAñadirLista: DialogFragment() {
             } else {
 
                 print("ffffffffff")
-              //  dbLista.actualizaUltimoNumero (::ultimo)
+               dbLista.actualizaUltimoNumero (::ultimo)
 
                 //Toast.makeText(activity,"${dbLista.ultimoNumero}",Toast.LENGTH_LONG).show();
 
