@@ -139,13 +139,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-
-
-
-
-
-
         //*************************************************
         //*************************************************
         //*************************************************
@@ -158,6 +151,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
 
     /**
      * Comprueba que el usuario no ha dejado los campos en blanco

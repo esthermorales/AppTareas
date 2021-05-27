@@ -10,8 +10,9 @@ class DBListaTarea {
     private val db = FirebaseFirestore.getInstance()
     private val coleccion = db.collection("listaTareas")
     private val usuarios = ArrayList<Usuario>()
+
     //public var ultimoNumero = 0
-    private lateinit var usuariosTmp : ArrayList<Usuario>
+    private lateinit var usuariosTmp: ArrayList<Usuario>
 
 
     /**
@@ -27,8 +28,10 @@ class DBListaTarea {
         //actualizaUltimoNumero(::ulNum)
     }
 
-    fun recuperar(lista: ArrayList<ListaTareas>,
-                  dostuff: (users: ArrayList<ListaTareas>) -> Unit) {
+    fun recuperar(
+        lista: ArrayList<ListaTareas>,
+        dostuff: (users: ArrayList<ListaTareas>) -> Unit
+    ) {
         //Para buscar el usuario
         val usuariosDB = db.collection("usuarios")
         val dbuser = DBUsuario()
@@ -61,25 +64,32 @@ class DBListaTarea {
      */
     fun actualizaUltimoNumero(dostuff: (numero: Int) -> Unit) {
         var numero = 0
-        val doc = db.collection("listaTareas").orderBy("idLista", Query.Direction.DESCENDING)
-            .limit(1).get().addOnSuccessListener {
-                it.forEach {
-                    if (it != null)
-                        numero = (it.data.get("idLista") as String).toInt()
-                }
-                //Esta funcion recibe el número final
-                dostuff(numero)
+        val doc = db.collection("listaTareas").get().addOnSuccessListener {
+            var numeros = ArrayList<Int>()
+            it.forEach {
+                if (it != null)
+                    numeros.add((it.data.get("idLista") as String).toInt())
             }
+
+            //recupero todos los números y selecciono el ultimo, que es el mas alto
+
+            numeros.sort()
+            if (numeros.size > 0) {
+                numero = numeros.get(numeros.size - 1)
+            }
+            //Esta funcion recibe el número final
+            dostuff(numero)
+        }
     }
 
-    fun recuperarUsuarios(usu: ArrayList<Usuario>){
+    fun recuperarUsuarios(usu: ArrayList<Usuario>) {
         usuariosTmp = usu
     }
     //Para utilizar con el metodo anterior
 
     //posiblemente hay que eliminar esta función
-    fun ulNum(ult: Int){
-            //ultimoNumero = ult
+    fun ulNum(ult: Int) {
+        //ultimoNumero = ult
     }
 
 }
