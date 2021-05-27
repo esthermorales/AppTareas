@@ -15,7 +15,7 @@ class DBElementoTarea {
     var ultimoNumero: Int = 0
 
     init {
-        actualizaUltimoNumero()
+        //actualizaUltimoNumero()
     }
     /**
      * Inserta un elemento dentro de FireBase
@@ -24,7 +24,7 @@ class DBElementoTarea {
 
     fun insertar(elemento: ElementoTarea) {
         db.collection("elemento").document(elemento.idElemento.toString()).set(elemento.toMap())
-        actualizaUltimoNumero()
+        //actualizaUltimoNumero()
     }
 
     /**
@@ -38,16 +38,13 @@ class DBElementoTarea {
         dblis.recuperar(listatarTmp, ::recuperarListaTareas)
         var tmp: ListaTareas = ListaTareas(0, "", "")
         coleccion.get(Source.CACHE).addOnSuccessListener {
-            println("------> Estoy aqui")
             for (document in it) {
-                println("------> Y ahora aqui")
                 var sub: String = ""
                 //SI esxiste subtarea
                 if (document.data.get("subTarea") != null){
                     sub = document.data.get("subTarea") as String
                 }
 
-                println("------> Now Here")
                 println(listatarTmp.size)
                 for (subt in listatar) {
                     if(subt != null && sub != null)
@@ -75,13 +72,15 @@ class DBElementoTarea {
     /**
      * Recupera el último numero id
      */
-    fun actualizaUltimoNumero(){
+    fun actualizaUltimoNumero(dostuff: (numero: Int) -> Unit){
+        var numero: Int = 0
         val doc = db.collection("elemento").orderBy("idElemento", Query.Direction.DESCENDING)
             .limit(1).get().addOnSuccessListener {
                 it.forEach {
                     if (it != null)
-                        ultimoNumero = (it.data.get("idElemento") as String).toInt()
+                        numero = (it.data.get("idElemento") as String).toInt()
                 }
+                dostuff(numero)
             }
     }
 
