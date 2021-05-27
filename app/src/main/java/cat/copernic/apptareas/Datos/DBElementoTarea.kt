@@ -74,12 +74,20 @@ class DBElementoTarea {
      */
     fun actualizaUltimoNumero(dostuff: (numero: Int) -> Unit){
         var numero: Int = 0
-        val doc = db.collection("elemento").orderBy("idElemento", Query.Direction.DESCENDING)
-            .limit(1).get().addOnSuccessListener {
-                it.forEach {
+        val doc = db.collection("elemento").get().addOnSuccessListener {
+            var numeros = ArrayList<Int>()
+            it.forEach {
                     if (it != null)
-                        numero = (it.data.get("idElemento") as String).toInt()
+                        numeros.add((it.data.get("idElemento") as String).toInt())
                 }
+
+                //una vez estan recuperados todos los números de la db, se ordenan
+                numeros.sort()
+                //si hay contenido se coge el último elemento, que es el número más alto
+                if (numeros.size > 0){
+                    numero = numeros.get(numeros.size  -1)
+                }
+                //Esta funcion obtiene el número más alto
                 dostuff(numero)
             }
     }
