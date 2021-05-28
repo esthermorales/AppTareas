@@ -26,6 +26,7 @@ class PopUpAñadirLista: DialogFragment() {
     var dbLista= DBListaTarea()
 
 
+
     private lateinit var auth: FirebaseAuth
     //private var mDatabase: DatabaseReference? = null
 
@@ -51,6 +52,9 @@ class PopUpAñadirLista: DialogFragment() {
 
 
         binding.idBtnAnadirL.setOnClickListener {
+
+
+
 
             if (binding.editTextTextPersonName2.equals("") || binding.editTextTextPersonName3.equals(
                     ""
@@ -86,6 +90,8 @@ class PopUpAñadirLista: DialogFragment() {
 
 
             dismiss()
+
+
         }
 
         var view= binding.root
@@ -111,6 +117,7 @@ class PopUpAñadirLista: DialogFragment() {
     fun ultimo(num:Int){
         listaTareas.idLista = num + 1
         dbLista.insertar(listaTareas)
+
     }
 
    
