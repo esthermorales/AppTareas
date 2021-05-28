@@ -46,7 +46,7 @@ class PopUpAñadirLista: DialogFragment() {
         _binding =FragmentAnadirListaBinding.inflate(inflater, container, false)
 
 
-        listaTareas=ListaTareas(7)
+        listaTareas=ListaTareas(0)
 
 
 
@@ -69,23 +69,21 @@ class PopUpAñadirLista: DialogFragment() {
                 var usuario=Usuario(fire.email)
                 println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + usuario.email)
 
-                print("ffffffffff")
-               dbLista.actualizaUltimoNumero (::ultimo)
-
                 //Toast.makeText(activity,"${dbLista.ultimoNumero}",Toast.LENGTH_LONG).show();
 
-               listaTareas.idLista=7
+               //listaTareas.idLista=7
                 listaTareas.categoria = binding.editTextTextPersonName2.text.toString()
                 listaTareas.nombre = binding.editTextTextPersonName3.text.toString()
                 listaTareas.propietario=usuario
 
+                dbLista.actualizaUltimoNumero (::ultimo)
 
                 binding.editTextTextPersonName2.setText("")
                 binding.editTextTextPersonName3.setText("")
 
             }
 
-            dbLista.insertar(listaTareas)
+
 
             dismiss()
         }
@@ -111,7 +109,8 @@ class PopUpAñadirLista: DialogFragment() {
     }
 
     fun ultimo(num:Int){
-        println("rrrrrkkkrr"+num)
+        listaTareas.idLista = num + 1
+        dbLista.insertar(listaTareas)
     }
 
    
