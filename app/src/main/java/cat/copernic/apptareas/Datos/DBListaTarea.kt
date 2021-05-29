@@ -3,7 +3,6 @@ package cat.copernic.apptareas.Datos
 import cat.copernic.apptareas.Modelos.ListaTareas
 import cat.copernic.apptareas.Modelos.Usuario
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.Source
 
 class DBListaTarea {
@@ -60,6 +59,27 @@ class DBListaTarea {
     }
 
     /**
+     * Versión 2 de recuperar para no alterar la funcion recuperar en caso de que se este utilizando la otra
+     */
+    fun recuperar_v2(lista: ArrayList<ListaTareas>, dostuff: (users: ArrayList<ListaTareas>) -> Unit){
+        coleccion.get(Source.CACHE).addOnSuccessListener {
+            for (document in it) {
+                val listaTareasTmp = ListaTareas(
+                    (document.data.get("idLista") as String).toInt(),
+                    document.data.get("nombre") as String, document.data.get("categoria") as String
+                )
+                //Añadir el usuario propietari .o
+
+                // ---
+                lista.add(listaTareasTmp)
+            }
+            //Funcion que trabajara con el contenido
+            dostuff(lista)
+        }
+
+    }
+
+    /**
      * Recupera el último numero id
      */
     fun actualizaUltimoNumero(dostuff: (numero: Int) -> Unit) {
@@ -90,6 +110,61 @@ class DBListaTarea {
     //posiblemente hay que eliminar esta función
     fun ulNum(ult: Int) {
         //ultimoNumero = ult
+    }
+
+    /**
+     * Utilizar esta función para llamar la dbusuarios
+     * en esta funcion ya se deberian haber recuperado el ArrayList de usuarios
+     */
+    fun conUsuariosRecuperados(usuarios :ArrayList<Usuario>){
+        var lista = ArrayList<ListaTareas>()
+        coleccion.get().addOnSuccessListener {
+            for (document in it) {
+                val listaTareasTmp = ListaTareas(
+                    (document.data.get("idLista") as String).toInt(),
+                    document.data.get("nombre") as String, document.data.get("categoria") as String
+                )
+                //BUSCAR PROPIETARIO EN LA DB
+                for (usuario in usuarios) {
+                    var emai = document.data.get("propietario") as String
+                    if (usuario.email.equals(document.data.get("propietario" as String))) {
+                        listaTareasTmp.propietario = usuario
+                    }
+                }
+                lista.add(listaTareasTmp)
+            }
+            //******
+            ejecutarConDatosRecuperados(lista)
+            //******
+        }
+    }
+
+    /**
+     * !!
+     * !!
+     * Metodo recuperar usuario
+     * Este es el metodo que hay que llamar para recuperar!!!
+     */
+    fun recuperarContenido(){
+        var usu = DBUsuario()
+        usu.recuperar(usuarios, ::conUsuariosRecuperados)
+    }
+
+    /**
+     * Ejemplo para testear, eliminar despues
+     */
+    fun mostrar(mues : ArrayList<ListaTareas>){
+        for (lista in mues)
+            println(lista.toString())
+    }
+
+    /**
+     * !!!!!!
+     * Aqui se pueden lanzar los metodos, lista contiene los elementos
+     */
+    fun ejecutarConDatosRecuperados(lista: ArrayList<ListaTareas>){
+        //Ejemplo para probar el funcionamiento
+        mostrar(lista)
     }
 
 }
