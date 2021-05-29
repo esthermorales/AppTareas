@@ -165,6 +165,8 @@ class DBListaTarea {
     fun ejecutarConDatosRecuperados(lista: ArrayList<ListaTareas>){
         //Ejemplo para probar el funcionamiento
         mostrar(lista)
+        var recuperarDBElementos = DBElementoTarea()
+        recuperarDBElementos.conListaRecuperada(lista)
     }
 
 }

@@ -11,12 +11,13 @@ class DBElementoTarea {
     private val db = FirebaseFirestore.getInstance()
     private val coleccion = db.collection("elemento")
     private var listatarTmp = ArrayList<ListaTareas>()
-    private lateinit var  listatar: ArrayList<ListaTareas>
+    private lateinit var listatar: ArrayList<ListaTareas>
     var ultimoNumero: Int = 0
 
     init {
         //actualizaUltimoNumero()
     }
+
     /**
      * Inserta un elemento dentro de FireBase
      */
@@ -30,8 +31,10 @@ class DBElementoTarea {
     /**
      * Recupera los dotos referentes a ElementoTarea de Firebase
      */
-    fun recuperar(list: ArrayList<ElementoTarea>,
-                  dostuff: (users: ArrayList<ElementoTarea>) -> Unit) {
+    fun recuperar(
+        list: ArrayList<ElementoTarea>,
+        dostuff: (users: ArrayList<ElementoTarea>) -> Unit
+    ) {
         //BUSCAR LISTA EN DB
         val dblis = DBListaTarea()
         //Recupera la lista de tareas
@@ -41,16 +44,16 @@ class DBElementoTarea {
             for (document in it) {
                 var sub: String = ""
                 //SI esxiste subtarea
-                if (document.data.get("subTarea") != null){
+                if (document.data.get("subTarea") != null) {
                     sub = document.data.get("subTarea") as String
                 }
 
                 println(listatarTmp.size)
                 for (subt in listatar) {
-                    if(subt != null && sub != null)
-                    if (sub.toInt() == subt.idLista) {
-                        tmp = subt
-                    }
+                    if (subt != null && sub != null)
+                        if (sub.toInt() == subt.idLista) {
+                            tmp = subt
+                        }
                 }
 
                 val elementoTmp = ElementoTarea(
@@ -72,29 +75,90 @@ class DBElementoTarea {
     /**
      * Recupera el último numero id
      */
-    fun actualizaUltimoNumero(dostuff: (numero: Int) -> Unit){
+    fun actualizaUltimoNumero(dostuff: (numero: Int) -> Unit) {
         var numero: Int = 0
         val doc = db.collection("elemento").get().addOnSuccessListener {
             var numeros = ArrayList<Int>()
             it.forEach {
-                    if (it != null)
-                        numeros.add((it.data.get("idElemento") as String).toInt())
-                }
-
-                //una vez estan recuperados todos los números de la db, se ordenan
-                numeros.sort()
-                //si hay contenido se coge el último elemento, que es el número más alto
-                if (numeros.size > 0){
-                    numero = numeros.get(numeros.size  -1)
-                }
-                //Esta funcion obtiene el número más alto
-                dostuff(numero)
+                if (it != null)
+                    numeros.add((it.data.get("idElemento") as String).toInt())
             }
+
+            //una vez estan recuperados todos los números de la db, se ordenan
+            numeros.sort()
+            //si hay contenido se coge el último elemento, que es el número más alto
+            if (numeros.size > 0) {
+                numero = numeros.get(numeros.size - 1)
+            }
+            //Esta funcion obtiene el número más alto
+            dostuff(numero)
+        }
     }
 
-    fun recuperarListaTareas(lista: ArrayList<ListaTareas>){
+    fun recuperarListaTareas(lista: ArrayList<ListaTareas>) {
         listatar = ArrayList<ListaTareas>()
-        listatar= lista
+        listatar = lista
+    }
+
+    /**
+     * Metodo para recuperar una vez recuperada la lista
+     */
+    fun conListaRecuperada(listaTareas: ArrayList<ListaTareas>) {
+        //var listaTareas = ArrayList<ListaTareas>()
+
+        var list = ArrayList<ElementoTarea>()
+        //Inicializo sin contenido
+        var tmpLista = ListaTareas(0, "")
+
+        coleccion.get().addOnSuccessListener {
+            for (document in it) {
+                var sub: Long = 0
+                //SI esxiste subtarea
+                if (document.data.get("subTarea") != null) {
+                    sub = document.data.get("subTarea") as Long
+                    //Si hay contenido en listaTareas
+                    if (listaTareas.size > 0) {
+                        for (elemLista in listaTareas) {
+                            //Si es igual a la id de lista
+                            if (elemLista.idLista.toInt() == sub.toInt()) {
+                                tmpLista = elemLista
+                            }
+                        }
+                    }
+                }
+
+                val elementoTmp = ElementoTarea(
+                    (document.data.get("idElemento") as Long).toInt(),
+                    document.data.get("tarea") as String,
+                    tmpLista,
+                    (document.data.get("posicion") as Long).toInt(),
+                    document.data.get("hecho") as Boolean,
+                    document.data.get("editable") as Boolean,
+                )
+                list.add(elementoTmp)
+            }
+            //code here
+            //EL codigo que se ejecuta
+            codigoEjecutarConDatos(list)
+
+        }
+
+    }
+
+    /**
+     * Aqui introducir los metodos a ejecutar
+     */
+    fun codigoEjecutarConDatos(listaElementos: ArrayList<ElementoTarea>) {
+        //ejemplo
+        mostrar(listaElementos)
+    }
+
+    /**
+     * ejemplo
+     */
+    fun mostrar(elm: ArrayList<ElementoTarea>) {
+        for (elemento in elm)
+            println(elemento.toString())
     }
 
 
