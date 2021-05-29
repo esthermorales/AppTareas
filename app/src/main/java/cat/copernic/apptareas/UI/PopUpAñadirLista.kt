@@ -1,16 +1,22 @@
 package cat.copernic.apptareas.UI
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import cat.copernic.apptareas.Datos.DBListaTarea
 import cat.copernic.apptareas.Modelos.ListaTareas
+import cat.copernic.apptareas.Modelos.Usuario
 import cat.copernic.apptareas.databinding.FragmentAnadirListaBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class PopUpAñadirLista: DialogFragment() {
 
@@ -19,6 +25,9 @@ class PopUpAñadirLista: DialogFragment() {
     lateinit  var listaTareas : ListaTareas
     var dbLista= DBListaTarea()
 
+
+
+    private lateinit var auth: FirebaseAuth
     //private var mDatabase: DatabaseReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,11 +47,14 @@ class PopUpAñadirLista: DialogFragment() {
         _binding =FragmentAnadirListaBinding.inflate(inflater, container, false)
 
 
-        listaTareas=ListaTareas(12)
+        listaTareas=ListaTareas(0)
 
 
 
         binding.idBtnAnadirL.setOnClickListener {
+
+
+
 
             if (binding.editTextTextPersonName2.equals("") || binding.editTextTextPersonName3.equals(
                     ""
@@ -57,24 +69,29 @@ class PopUpAñadirLista: DialogFragment() {
                 }
 
             } else {
-
-                print("ffffffffff")
-               dbLista.actualizaUltimoNumero (::ultimo)
+                var fire=  Firebase.auth.currentUser
+                var usuario=Usuario(fire.email)
+                println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + usuario.email)
 
                 //Toast.makeText(activity,"${dbLista.ultimoNumero}",Toast.LENGTH_LONG).show();
 
-               listaTareas.idLista=12
+               //listaTareas.idLista=7
                 listaTareas.categoria = binding.editTextTextPersonName2.text.toString()
                 listaTareas.nombre = binding.editTextTextPersonName3.text.toString()
+                listaTareas.propietario=usuario
+
+                dbLista.actualizaUltimoNumero (::ultimo)
 
                 binding.editTextTextPersonName2.setText("")
                 binding.editTextTextPersonName3.setText("")
 
             }
 
-            dbLista.insertar(listaTareas)
+
 
             dismiss()
+
+
         }
 
         var view= binding.root
@@ -98,6 +115,13 @@ class PopUpAñadirLista: DialogFragment() {
     }
 
     fun ultimo(num:Int){
-        println("rrrrrkkkrr"+num)
+        listaTareas.idLista = num + 1
+        dbLista.insertar(listaTareas)
+
     }
+
+   
+
+
+
 }
