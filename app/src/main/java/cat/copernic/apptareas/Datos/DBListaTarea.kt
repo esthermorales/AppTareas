@@ -165,8 +165,18 @@ class DBListaTarea {
     fun ejecutarConDatosRecuperados(lista: ArrayList<ListaTareas>){
         //Ejemplo para probar el funcionamiento
         mostrar(lista)
+        //-- Recupera los datos de la db Elementos
         var recuperarDBElementos = DBElementoTarea()
         recuperarDBElementos.conListaRecuperada(lista)
+        //--
+        //Recupera compartido
+        var compartido = DBCompartido()
+        println("----------------------------- test ---------------------------")
+        compartido.recuperar(lista)
+
+
     }
+
+
 
 }
