@@ -79,7 +79,7 @@ class DBListaTarea {
 
     //posiblemente hay que eliminar esta función
     fun ulNum(ult: Int){
-            //ultimoNumero = ult
+        //ultimoNumero = ult
     }
 
 }

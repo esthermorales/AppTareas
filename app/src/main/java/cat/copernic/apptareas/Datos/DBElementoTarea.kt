@@ -51,9 +51,9 @@ class DBElementoTarea {
                 println(listatarTmp.size)
                 for (subt in listatar) {
                     if(subt != null && sub != null)
-                    if (sub.toInt() == subt.idLista) {
-                        tmp = subt
-                    }
+                        if (sub.toInt() == subt.idLista) {
+                            tmp = subt
+                        }
                 }
 
                 val elementoTmp = ElementoTarea(
