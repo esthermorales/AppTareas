@@ -44,7 +44,7 @@ class home : Fragment(), ListaTareasAdapter.OnUserClic {
 
         boton()
 
-        binding.btnActualizaLista.setOnClickListener {
+        binding.idImActualizar.setOnClickListener {
             observeData()
         }
 

@@ -41,20 +41,14 @@ class PopUpAñadirLista: DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
-
+        
         _binding =FragmentAnadirListaBinding.inflate(inflater, container, false)
 
 
         listaTareas=ListaTareas(0)
 
 
-
         binding.idBtnAnadirL.setOnClickListener {
-
-
-
 
             if (binding.editTextTextPersonName2.equals("") || binding.editTextTextPersonName3.equals(
                     ""
@@ -87,27 +81,18 @@ class PopUpAñadirLista: DialogFragment() {
 
             }
 
-
-
             dismiss()
 
-
         }
-
-        var view= binding.root
-        return view
-
-    }
-
-   /* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
 
         binding.idButonCancelar .setOnClickListener{
             dismiss()
         }
-    }*/
+
+        var view= binding.root
+        return view
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -119,9 +104,4 @@ class PopUpAñadirLista: DialogFragment() {
         dbLista.insertar(listaTareas)
 
     }
-
-   
-
-
-
 }
