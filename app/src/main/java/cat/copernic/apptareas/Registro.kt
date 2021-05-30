@@ -9,10 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
+import cat.copernic.apptareas.UI.VistaUI
 import cat.copernic.apptareas.databinding.ActivityRegistroBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.type.Color
+import java.util.*
+import kotlin.concurrent.timerTask
 
 class Registro : AppCompatActivity() {
 
@@ -49,6 +52,8 @@ class Registro : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+
         registreUsuari()
     }
 
@@ -63,6 +68,8 @@ class Registro : AppCompatActivity() {
         binding.idEtEmail.setText("")
         binding.idEtPassword.setText("")
         binding.idEtConfPass.setText("")
+
+
     }
 
     fun createUserWithEmailAndPassword(email: String, passwordd: String) {
@@ -73,6 +80,14 @@ class Registro : AppCompatActivity() {
                     val user = mAuth!!.currentUser
                     updateUI(user)
                     mensajeEmergente("Información", "Te has registrado correctamente.")
+
+                    val timer = Timer()
+                    timer.schedule(timerTask { nextScreen() }, 2000)
+
+
+
+                   // val intent = Intent(this, VistaUI::class.java)
+                   // startActivity(intent)
 
                 } else {
                     mensajeEmergente("Error", "Error en la autentificación")
@@ -91,7 +106,10 @@ class Registro : AppCompatActivity() {
                         createUserWithEmailAndPassword(
                             binding.idEtEmail.text.toString(),
                             binding.idEtPassword.text.toString()
+
+
                         )
+
                     } else {
                         mensajeEmergente(
                             "Error",
@@ -105,6 +123,11 @@ class Registro : AppCompatActivity() {
                 mensajeEmergente("Error", "Se tienen que llenar todos los campos")
             }
         }
+    }
+
+    private fun nextScreen(){
+        val intent = Intent(this, VistaUI::class.java)
+        startActivity(intent)
     }
 
     private fun mensajeEmergente(titulo: String, mensage: String) {

@@ -10,7 +10,7 @@
         android:id="@+id/imageView"
         android:layout_width="95dp"
         android:layout_height="99dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="@+id/idTvRegistrate"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_apptareas" />
@@ -19,21 +19,22 @@
         android:id="@+id/idBienvenid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:fontFamily="@font/quicksand_bold"
         android:text="@string/Bienvenid"
         android:textColor="@color/naranjaApp"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.421" />
 
     <TextView
         android:id="@+id/idTvRegistrate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="@font/quicksand_bold"
         android:text="@string/idStringRegistrate"
         android:textColor="@color/azulApp"
@@ -82,7 +83,7 @@
         android:id="@+id/idCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/asap_medium"
         android:text="@string/idCheck"
         android:textColor="@color/grisApp"
@@ -94,12 +95,13 @@
         android:id="@+id/idBtnRegistro"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/boton_app"
         android:text="@string/idBtnRegistrate"
         android:textColor="#EDE9E9"
         app:backgroundTint="@null"
-        android:background="@drawable/boton_app"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idCheck" />
 
@@ -107,7 +109,7 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/asap_medium"
         android:textColor="@color/azulApp"
         android:textSize="18sp"
@@ -155,7 +157,7 @@
         app:layout_constraintTop_toBottomOf="@+id/idBtnRegistro" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/idEntrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
