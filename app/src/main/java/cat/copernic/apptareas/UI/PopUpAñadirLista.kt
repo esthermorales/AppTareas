@@ -1,7 +1,6 @@
 package cat.copernic.apptareas.UI
 
-import android.content.Context
-import android.content.SharedPreferences
+
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -41,7 +40,7 @@ class PopUpAñadirLista: DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        
+
         _binding =FragmentAnadirListaBinding.inflate(inflater, container, false)
 
 
