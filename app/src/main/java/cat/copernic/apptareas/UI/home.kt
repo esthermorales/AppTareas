@@ -2,7 +2,6 @@ package cat.copernic.apptareas.UI
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -88,9 +87,7 @@ class home : Fragment(), ListaTareasAdapter.OnUserClic {
     }
 
     override fun onUserClickAction(listas: ListaTareas) {
-
-        Toast.makeText(context, "Hola, que tal?", Toast.LENGTH_SHORT).show()
-        //val arg = homeUserDirections.actionHomeUserToFragmentEditarMascota(mascota.chip)
-       // findNavController().navigate(arg)
+        val arg = homeDirections.actionHome2ToTareas(listas.idLista)
+        findNavController().navigate(arg)
     }
 }

@@ -3,7 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'com.google.gms.google-services'
     id 'kotlin-android-extensions'
-
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlinx-serialization'
 
 }
 
@@ -81,4 +82,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.3.3"
 
     implementation 'androidx.core:core:1.2.0'
+
+    //serializable
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 }

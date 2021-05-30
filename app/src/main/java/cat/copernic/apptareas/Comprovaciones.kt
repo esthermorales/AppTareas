@@ -12,4 +12,18 @@ class Comprovaciones {
         val pattern: Pattern = Pattern.compile("^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+.[A-Za-z0-9]+")
         return pattern.matcher(correo).matches()
     }
+
+    fun contieneTexto(txt: String): Boolean {
+        var resultado = false
+        if (txt != null) {
+            if (!txt.equals("")) {
+                resultado = true
+            } else {
+                resultado = false
+            }
+        } else {
+            resultado = false
+        }
+        return resultado
+    }
 }

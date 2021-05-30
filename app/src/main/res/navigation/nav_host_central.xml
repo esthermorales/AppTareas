@@ -26,5 +26,9 @@
         android:id="@+id/tareas"
         android:name="cat.copernic.apptareas.UI.tareas"
         android:label="fragment_tareas"
-        tools:layout="@layout/fragment_tareas" />
+        tools:layout="@layout/fragment_tareas" >
+        <argument
+            android:name="listaID"
+            app:argType="integer" />
+    </fragment>
 </navigation>
