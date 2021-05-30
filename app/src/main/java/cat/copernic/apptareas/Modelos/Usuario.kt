@@ -1,6 +1,6 @@
 package cat.copernic.apptareas.Modelos
 
-class Usuario(val email: String, var nombre: String? = null): Comparable<Usuario> {
+class Usuario(var email: String, var nombre: String? = null): Comparable<Usuario> {
     //El nombre puede ser null, porque al iniciar solo pedimos el mail.
 
     /**

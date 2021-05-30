@@ -40,7 +40,7 @@ package cat.copernic.apptareas.Modelos
      * Método toString para mostrar los datos
      */
     override fun toString(): String {
-        return "Lista[$idLista, $nombre, $categoria]"
+        return "Lista[$idLista, $nombre, $categoria, ${propietario.toString()}]"
     }
 
     /**

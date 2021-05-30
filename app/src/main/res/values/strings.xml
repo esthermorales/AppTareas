@@ -45,4 +45,5 @@
     <string name="btnGuardar">Guardar</string>
     <string name="logOut">Cerrar sesión</string>
     <string name="editPerfil">Editar perfil</string>
+    <string name="strListasTl">Listas</string>
 </resources>

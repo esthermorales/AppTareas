@@ -15,19 +15,11 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import android.text.TextUtils
-import android.widget.Button
-import cat.copernic.apptareas.Datos.DBElementoTarea
 import cat.copernic.apptareas.Datos.DBListaTarea
-import cat.copernic.apptareas.Datos.DBUsuario
 import cat.copernic.apptareas.Modelos.ElementoTarea
 import cat.copernic.apptareas.Modelos.ListaTareas
 import cat.copernic.apptareas.Modelos.Usuario
 import cat.copernic.apptareas.UI.VistaUI
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.android.awaitFrame
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -135,14 +127,11 @@ class MainActivity : AppCompatActivity() {
         //  val dbelm = DBElementoTarea()
         //  dbelm.recuperar(elemnts)
 
-
-
-
-
-
-
-
-
+        var test = DBListaTarea()
+        println("--------------------------->")
+        test.recuperarContenido()
+        println("--------------------------->")
+        //recuperarTest
 
 
 
@@ -158,6 +147,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
 
     /**
      * Comprueba que el usuario no ha dejado los campos en blanco
