@@ -81,8 +81,8 @@
 
     <ImageView
         android:id="@+id/idImActualizar"
-        android:layout_width="59dp"
-        android:layout_height="49dp"
+        android:layout_width="37dp"
+        android:layout_height="36dp"
         android:layout_marginEnd="36dp"
         android:layout_marginRight="36dp"
         android:layout_marginBottom="8dp"
