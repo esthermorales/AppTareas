@@ -2,12 +2,11 @@ package cat.copernic.apptareas.UI
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import cat.copernic.apptareas.Datos.DBElementoTarea
@@ -45,6 +44,9 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentTareasBinding.inflate(inflater, container, false)
+
+        setHasOptionsMenu(true)
+
         return binding.root
     }
 
@@ -138,4 +140,31 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic {
         dbElemento.insertar(elemento)
         adapter.notifyDataSetChanged()
     }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        val setings = menu.findItem(R.id.cierreSesion)
+        val hola = menu.findItem(R.id.gestionaTareas)
+        setings.isVisible = false
+        hola.isVisible = true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_tareas, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.opcLista -> {
+                findNavController().navigate(R.id.action_tareas_to_fragmentCompartirLista)
+                true
+            }
+            R.id.gestionaTareas ->{
+                Toast.makeText(context, "La has dado a Gestion", Toast.LENGTH_SHORT).show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 }

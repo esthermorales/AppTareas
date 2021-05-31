@@ -30,5 +30,13 @@
         <argument
             android:name="listaID"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_tareas_to_fragmentCompartirLista"
+            app:destination="@id/fragmentCompartirLista" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentCompartirLista"
+        android:name="cat.copernic.apptareas.UI.FragmentCompartirLista"
+        android:label="fragment_compartir_lista"
+        tools:layout="@layout/fragment_compartir_lista" />
 </navigation>
