@@ -139,4 +139,5 @@ class Registro : AppCompatActivity() {
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
+
 }
