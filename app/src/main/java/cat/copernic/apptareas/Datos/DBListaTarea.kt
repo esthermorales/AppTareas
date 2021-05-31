@@ -173,8 +173,6 @@ class DBListaTarea {
         var compartido = DBCompartido()
         println("----------------------------- test ---------------------------")
         compartido.recuperar(lista)
-
-
     }
 
 

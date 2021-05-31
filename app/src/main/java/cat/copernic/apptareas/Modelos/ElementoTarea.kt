@@ -1,6 +1,6 @@
 package cat.copernic.apptareas.Modelos
 
-class ElementoTarea(
+class  ElementoTarea(
     val idElemento: Int,
     var tarea: String,
     var subTarea: ListaTareas,
