@@ -36,7 +36,7 @@ class DBElementoTarea {
         dostuff: (users: ArrayList<ElementoTarea>) -> Unit
     ) {
         var tmp: ListaTareas = ListaTareas(0, "", "")
-        coleccion.whereEqualTo("padre", id).get(Source.CACHE).addOnSuccessListener {
+        coleccion.whereEqualTo("padre", id).get().addOnSuccessListener {
             for (document in it) {
                 var sub: String = ""
                 //SI esxiste subtarea

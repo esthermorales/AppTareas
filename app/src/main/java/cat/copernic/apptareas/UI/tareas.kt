@@ -45,7 +45,15 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic {
         // Inflate the layout for this fragment
         binding = FragmentTareasBinding.inflate(inflater, container, false)
 
+        val identificador = args.listaID
+
         setHasOptionsMenu(true)
+
+        adapter = TareasAdapter(this)
+        binding.LlistaFaqsView.layoutManager = LinearLayoutManager(context)
+        binding.LlistaFaqsView.adapter = adapter
+
+        dbElemento.recuperar(identificador.toString(), ::recuperaElementos)
 
         return binding.root
     }
@@ -77,15 +85,7 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic {
 
     fun vista(list: ListaTareas){
 
-        adapter = TareasAdapter(this)
-        binding.LlistaFaqsView.layoutManager = LinearLayoutManager(context)
-        binding.LlistaFaqsView.adapter = adapter
-
         binding.idTvTitulo.text = list.categoria
-
-        var tareas = ArrayList<ElementoTarea>()
-
-        dbElemento.recuperar(args.listaID.toString(), ::recuperaElementos)
 
         println("**>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + dbLstas.ultimoNumero)
         binding.addLista.setOnClickListener {

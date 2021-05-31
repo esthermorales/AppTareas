@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.navigation.Navigation
 import cat.copernic.apptareas.MainActivity
 import cat.copernic.apptareas.R
 import com.google.firebase.auth.ktx.auth
@@ -31,5 +32,11 @@ class VistaUI : AppCompatActivity() {
             startActivity(toInit)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return Navigation.findNavController(this,
+            R.id.fragmentContainerView)
+            .navigateUp() || super.onSupportNavigateUp()
     }
 }
