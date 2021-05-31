@@ -12,7 +12,6 @@ class DBElementoTarea {
     private var listatarTmp = ArrayList<ListaTareas>()
     private lateinit var listatar: ArrayList<ListaTareas>
     var ultimoNumero: Int = 0
-    var list = ArrayList<ElementoTarea>()
 
     init {
         //actualizaUltimoNumero()
@@ -37,6 +36,7 @@ class DBElementoTarea {
     ) {
         var tmp: ListaTareas = ListaTareas(0, "", "")
         coleccion.whereEqualTo("padre", id).get().addOnSuccessListener {
+            var list = ArrayList<ElementoTarea>()
             for (document in it) {
                 var sub: String = ""
                 //SI esxiste subtarea

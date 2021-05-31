@@ -114,8 +114,6 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic {
 
             dbElemento.actualizaUltimoNumero(::numeroUltimo)
 
-            dbElemento.recuperar(identificador.toString(), ::recuperaElementos)
-
             dialogo.dismiss()
         }
     }
@@ -126,6 +124,7 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic {
 
         dbElemento.insertar(tarea)
 
+        dbElemento.recuperar(args.listaID.toString(), ::recuperaElementos)
 
     }
 
