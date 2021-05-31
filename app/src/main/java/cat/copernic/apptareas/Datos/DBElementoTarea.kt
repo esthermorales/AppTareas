@@ -32,10 +32,11 @@ class DBElementoTarea {
      * Recupera los dotos referentes a ElementoTarea de Firebase
      */
     fun recuperar(
+        id: String,
         dostuff: (users: ArrayList<ElementoTarea>) -> Unit
     ) {
         var tmp: ListaTareas = ListaTareas(0, "", "")
-        coleccion.get(Source.CACHE).addOnSuccessListener {
+        coleccion.whereEqualTo("padre", id).get(Source.CACHE).addOnSuccessListener {
             for (document in it) {
                 var sub: String = ""
                 //SI esxiste subtarea

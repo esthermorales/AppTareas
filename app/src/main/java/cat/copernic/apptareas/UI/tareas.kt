@@ -83,7 +83,7 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic {
 
         var tareas = ArrayList<ElementoTarea>()
 
-        dbElemento.recuperar(::recuperaElementos)
+        dbElemento.recuperar(args.listaID.toString(), ::recuperaElementos)
 
         println("**>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + dbLstas.ultimoNumero)
         binding.addLista.setOnClickListener {
@@ -112,6 +112,8 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic {
 
             dbElemento.actualizaUltimoNumero(::numeroUltimo)
 
+            dbElemento.recuperar(identificador.toString(), ::recuperaElementos)
+
             dialogo.dismiss()
         }
     }
@@ -121,6 +123,8 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic {
         tarea.posicion = dbElemento.ultimoNumero + 1
 
         dbElemento.insertar(tarea)
+
+
     }
 
     fun recuperaElementos(list : ArrayList<ElementoTarea>){

@@ -47,4 +47,6 @@
     <string name="editPerfil">Editar perfil</string>
     <string name="strListasTl">Listas</string>
     <string name="tareaNombre">Nombre para la tarea</string>
+    <string name="opciList">Opciones de lista</string>
+    <string name="EditTareasView">Gestionar tareas</string>
 </resources>
