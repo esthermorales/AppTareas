@@ -2,6 +2,7 @@ package cat.copernic.apptareas.Datos
 
 import cat.copernic.apptareas.Modelos.ListaTareas
 import cat.copernic.apptareas.Modelos.Usuario
+import cat.copernic.apptareas.UI.tareas
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
 
@@ -12,6 +13,7 @@ class DBListaTarea {
 
     //public var ultimoNumero = 0
     private lateinit var usuariosTmp: ArrayList<Usuario>
+    var ultimoNumero  = 0
 
 
     /**
@@ -164,7 +166,7 @@ class DBListaTarea {
      */
     fun ejecutarConDatosRecuperados(lista: ArrayList<ListaTareas>){
         //Ejemplo para probar el funcionamiento
-        mostrar(lista)
+        //mostrar(lista)
         //-- Recupera los datos de la db Elementos
         var recuperarDBElementos = DBElementoTarea()
         recuperarDBElementos.conListaRecuperada(lista)
@@ -173,8 +175,13 @@ class DBListaTarea {
         var compartido = DBCompartido()
         println("----------------------------- test ---------------------------")
         compartido.recuperar(lista)
+
     }
 
+    fun enviaDatos(lista: ArrayList<ListaTareas>) : ArrayList<ListaTareas> {
+        var ret = lista
 
+        return ret
+    }
 
 }

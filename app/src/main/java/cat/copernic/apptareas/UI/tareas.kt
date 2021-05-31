@@ -1,60 +1,137 @@
 package cat.copernic.apptareas.UI
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.Toast
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import cat.copernic.apptareas.Datos.DBElementoTarea
+import cat.copernic.apptareas.Datos.DBListaTarea
+import cat.copernic.apptareas.Modelos.ElementoTarea
+import cat.copernic.apptareas.Modelos.ListaTareas
+import cat.copernic.apptareas.Modelos.Usuario
 import cat.copernic.apptareas.R
+import cat.copernic.apptareas.UI.RecyclerTareas.TareasAdapter
+import cat.copernic.apptareas.UI.ViewListas.ListaTareasAdapter
+import cat.copernic.apptareas.databinding.FragmentTareasBinding
+import cat.copernic.apptareas.databinding.LayoutElementoBinding
+import cat.copernic.apptareas.databinding.PopUpCrearTareaBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
+import kotlinx.android.synthetic.main.pop_up_crear_tarea.view.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class tareas : Fragment(), TareasAdapter.OnTareaClic {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [tareas.newInstance] factory method to
- * create an instance of this fragment.
- */
-class tareas : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentTareasBinding
+    private lateinit var popu: PopUpCrearTareaBinding
+    private lateinit var recicler: LayoutElementoBinding
+    private val args by navArgs<tareasArgs>()
+    private val db = FirebaseFirestore.getInstance()
+    private val coleccion = db.collection("listaTareas")
+    private val dbLstas = DBListaTarea()
+    private lateinit var lista : ListaTareas
+    private val dbElemento = DBElementoTarea()
+    private lateinit var tarea: ElementoTarea
+    private lateinit var adapter: TareasAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tareas, container, false)
+        binding = FragmentTareasBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment tareas.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            tareas().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val identificador = args.listaID
+
+        recicler = LayoutElementoBinding.inflate(layoutInflater)
+
+        lista = ListaTareas(0, "", "")
+        coleccion.whereEqualTo("idLista", identificador.toString()).limit(1).get().addOnSuccessListener {
+            for (document in it) {
+                if (it != null){
+                    val listaTareasTmp = ListaTareas(
+                        (document.data.get("idLista") as String).toInt(),
+                        document.data.get("nombre") as String, document.data.get("categoria") as String
+                    )
+                    println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + listaTareasTmp.nombre)
+                    lista = listaTareasTmp
+
+                    vista(listaTareasTmp)
+
                 }
             }
+        }
+    }
+
+    fun vista(list: ListaTareas){
+
+        adapter = TareasAdapter(this)
+        binding.LlistaFaqsView.layoutManager = LinearLayoutManager(context)
+        binding.LlistaFaqsView.adapter = adapter
+
+        binding.idTvTitulo.text = list.categoria
+
+        var tareas = ArrayList<ElementoTarea>()
+
+        dbElemento.recuperar(::recuperaElementos)
+
+        println("**>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + dbLstas.ultimoNumero)
+        binding.addLista.setOnClickListener {
+            popPupEmergente()
+        }
+    }
+
+    fun popPupEmergente() {
+
+        val identificador = args.listaID
+
+        popu = PopUpCrearTareaBinding.inflate(layoutInflater)
+        val popUp = popu.root
+
+        val builder = AlertDialog.Builder(context)
+            .setView(popUp)
+            .setTitle("Nueva tarea")
+
+        val dialogo = builder.show()
+
+
+        popUp.btnCreaTarea.setOnClickListener {
+            tarea = ElementoTarea(0, popUp.editNombreTarea.toString(), 0, identificador)
+
+            tarea.tarea = popUp.editNombreTarea.text.toString()
+
+            dbElemento.actualizaUltimoNumero(::numeroUltimo)
+
+            dialogo.dismiss()
+        }
+    }
+
+    fun numeroUltimo(numero: Int){
+        tarea.idElemento = numero + 1
+        tarea.posicion = dbElemento.ultimoNumero + 1
+
+        dbElemento.insertar(tarea)
+    }
+
+    fun recuperaElementos(list : ArrayList<ElementoTarea>){
+        adapter.setListData(list)
+        adapter.notifyDataSetChanged()
+
+    }
+
+    override fun onUserClickAction(elemento: ElementoTarea) {
+        elemento.hecho = !elemento.hecho
+        dbElemento.insertar(elemento)
+        adapter.notifyDataSetChanged()
     }
 }

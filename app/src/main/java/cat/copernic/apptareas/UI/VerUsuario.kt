@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import cat.copernic.apptareas.Comprovaciones
+import cat.copernic.apptareas.Datos.DBUsuario
+import cat.copernic.apptareas.Modelos.Usuario
 import cat.copernic.apptareas.R
 import cat.copernic.apptareas.databinding.FragmentVerUsuarioBinding
 import com.google.firebase.auth.ktx.auth
@@ -20,6 +22,7 @@ class VerUsuario : Fragment() {
     var user = Firebase.auth.currentUser
     lateinit var correo: String
     private var comprovaciones = Comprovaciones()
+    var subir = DBUsuario()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +35,7 @@ class VerUsuario : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var contraseña = true
+        var contraseña = false
         var texto = ""
         correo = user!!.email.toString()
 
@@ -42,12 +45,13 @@ class VerUsuario : Fragment() {
                 texto += "El correo electronico no es valido"
             }
 
-            if(!comprovaciones.validaClave(binding.editPassword.text.toString())){
+            if(!comprovaciones.validaClave(binding.editPassword.text.toString()) && comprovaciones.contieneTexto(binding.editPassword.text.toString())){
                 if (!texto.equals(""))
                     texto += System.getProperty("line.separator")
 
                 texto += "La contraseña introducida no es valida"
-                contraseña = false
+            }else if (comprovaciones.contieneTexto(binding.editPassword.text.toString())) {
+                contraseña = true
             }
 
             if(!texto.equals("")){
@@ -73,6 +77,9 @@ class VerUsuario : Fragment() {
                         }
                 }
 
+                val usuario = Usuario(correo, binding.editNombre.text.toString())
+
+                subir.insertar(usuario)
                 updateUI()
             }
         }

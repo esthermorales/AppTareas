@@ -127,11 +127,11 @@ class MainActivity : AppCompatActivity() {
         //  val dbelm = DBElementoTarea()
         //  dbelm.recuperar(elemnts)
 
-        var test = DBListaTarea()
+        /*var test = DBListaTarea()
         println("--------------------------->")
         test.recuperarContenido()
         println("--------------------------->")
-        //recuperarTest
+        //recuperarTest*/
 
 
 

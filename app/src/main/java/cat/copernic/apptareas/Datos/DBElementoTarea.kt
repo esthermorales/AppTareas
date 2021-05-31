@@ -1,6 +1,5 @@
 package cat.copernic.apptareas.Datos
 
-import android.util.Log
 import cat.copernic.apptareas.Modelos.ElementoTarea
 import cat.copernic.apptareas.Modelos.ListaTareas
 import com.google.firebase.firestore.FirebaseFirestore
@@ -13,6 +12,7 @@ class DBElementoTarea {
     private var listatarTmp = ArrayList<ListaTareas>()
     private lateinit var listatar: ArrayList<ListaTareas>
     var ultimoNumero: Int = 0
+    var list = ArrayList<ElementoTarea>()
 
     init {
         //actualizaUltimoNumero()
@@ -32,13 +32,8 @@ class DBElementoTarea {
      * Recupera los dotos referentes a ElementoTarea de Firebase
      */
     fun recuperar(
-        list: ArrayList<ElementoTarea>,
         dostuff: (users: ArrayList<ElementoTarea>) -> Unit
     ) {
-        //BUSCAR LISTA EN DB
-        val dblis = DBListaTarea()
-        //Recupera la lista de tareas
-        dblis.recuperar(listatarTmp, ::recuperarListaTareas)
         var tmp: ListaTareas = ListaTareas(0, "", "")
         coleccion.get(Source.CACHE).addOnSuccessListener {
             for (document in it) {
@@ -48,21 +43,14 @@ class DBElementoTarea {
                     sub = document.data.get("subTarea") as String
                 }
 
-                println(listatarTmp.size)
-                for (subt in listatar) {
-                    if (subt != null && sub != null)
-                        if (sub.toInt() == subt.idLista) {
-                            tmp = subt
-                        }
-                }
-
                 val elementoTmp = ElementoTarea(
                     (document.data.get("idElemento") as String).toInt(),
                     document.data.get("tarea") as String,
-                    tmp,
                     (document.data.get("posicion") as String).toInt(),
-                    (document.data.get("hecho") as String).toBoolean(),
-                    (document.data.get("editable") as String).toBoolean(),
+                    (document.data.get("padre") as String).toInt(),
+                    tmp,
+                    (document.data.get("hecho") as Boolean),
+                    (document.data.get("editable") as Boolean),
                 )
                 list.add(elementoTmp)
             }
@@ -82,6 +70,9 @@ class DBElementoTarea {
             it.forEach {
                 if (it != null)
                     numeros.add((it.data.get("idElemento") as String).toInt())
+
+                if (ultimoNumero < (it.data.get("posicion") as String).toInt())
+                    ultimoNumero = (it.data.get("posicion") as String).toInt()
             }
 
             //una vez estan recuperados todos los números de la db, se ordenan
@@ -112,10 +103,10 @@ class DBElementoTarea {
 
         coleccion.get().addOnSuccessListener {
             for (document in it) {
-                var sub: Long = 0
+                var sub: String = "0"
                 //SI esxiste subtarea
                 if (document.data.get("subTarea") != null) {
-                    sub = document.data.get("subTarea") as Long
+                    sub = document.data.get("subTarea") as String
                     //Si hay contenido en listaTareas
                     if (listaTareas.size > 0) {
                         for (elemLista in listaTareas) {
@@ -128,10 +119,11 @@ class DBElementoTarea {
                 }
 
                 val elementoTmp = ElementoTarea(
-                    (document.data.get("idElemento") as Long).toInt(),
+                    (document.data.get("idElemento") as String).toInt(),
                     document.data.get("tarea") as String,
+                    (document.data.get("posicion") as String).toInt(),
+                    (document.data.get("padre") as String).toInt(),
                     tmpLista,
-                    (document.data.get("posicion") as Long).toInt(),
                     document.data.get("hecho") as Boolean,
                     document.data.get("editable") as Boolean,
                 )
