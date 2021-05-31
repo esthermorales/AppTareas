@@ -3,6 +3,7 @@ package cat.copernic.apptareas.Datos
 import android.util.Log
 import cat.copernic.apptareas.Modelos.ListaTareas
 import cat.copernic.apptareas.Modelos.Usuario
+import cat.copernic.apptareas.UI.FragmentCompartirLista
 import com.google.firebase.firestore.FirebaseFirestore
 
 class DBCompartido {
@@ -25,7 +26,7 @@ class DBCompartido {
         }
     }
 
-    fun recuperar(lista: ArrayList<ListaTareas>){
+    fun recuperar(lista: ArrayList<ListaTareas>, dostuff: (listaa: ArrayList<String>) -> Unit){
         var listaEmailString =  ArrayList<String>()
         coleccion.get().addOnSuccessListener {
             for (document in it) {
@@ -36,6 +37,8 @@ class DBCompartido {
                         listaEmailString.add(document.get("email") as String)
                     }
                     ejecutarCodigo(lis.idLista, listaEmailString)
+                    //Para ejecutar de manera remota, recibe un arrayList con el mail
+                    dostuff(listaEmailString)
                     listaEmailString.clear()
                 }
 
@@ -48,6 +51,8 @@ class DBCompartido {
      */
     fun ejecutarCodigo(idLista: Int, emailsUsuarios: ArrayList<String>){
         mostrar(idLista, emailsUsuarios)
+
+
     }
 
     //Ejemplo
@@ -57,5 +62,7 @@ class DBCompartido {
             println("-> " + texto)
 
     }
+
+
 
 }

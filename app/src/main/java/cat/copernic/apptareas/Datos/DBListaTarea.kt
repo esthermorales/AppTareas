@@ -174,7 +174,7 @@ class DBListaTarea {
         //Recupera compartido
         var compartido = DBCompartido()
         println("----------------------------- test ---------------------------")
-        compartido.recuperar(lista)
+        compartido.recuperar(lista,::nothing_)
 
     }
 
@@ -183,5 +183,10 @@ class DBListaTarea {
 
         return ret
     }
+
+    /**
+     * Unicamente porque pide el parametro la función
+     */
+    fun nothing_(a: ArrayList<String>){}
 
 }
