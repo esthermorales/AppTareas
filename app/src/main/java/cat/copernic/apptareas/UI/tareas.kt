@@ -6,6 +6,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.CheckBox
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -82,6 +83,9 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
 
 
     fun iniciaRecyclerView() {
+        binding.btnSlEditTareas.isVisible = false
+        binding.addLista.isVisible = true
+
         adapter = TareasAdapter(this)
         binding.LlistaFaqsView.layoutManager = LinearLayoutManager(context)
         binding.LlistaFaqsView.adapter = adapter
@@ -95,6 +99,10 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
 
         binding.addLista.setOnClickListener {
             popPupEmergente()
+        }
+
+        binding.btnSlEditTareas.setOnClickListener {
+            iniciaRecyclerView()
         }
     }
 
@@ -149,6 +157,9 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
 
     }
 
+    /**
+     * Metodos del menu
+     */
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         val setings = menu.findItem(R.id.cierreSesion)
@@ -157,6 +168,34 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
         hola.isVisible = true
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_tareas, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.opcLista -> {
+                findNavController().navigate(R.id.action_tareas_to_fragmentCompartirLista)
+                true
+            }
+            R.id.gestionaTareas ->{
+                binding.btnSlEditTareas.isVisible = true
+                binding.addLista.isVisible = false
+
+                editAdapter = EditaTareasAdapter(this)
+                binding.LlistaFaqsView.layoutManager = LinearLayoutManager(context)
+                binding.LlistaFaqsView.adapter = editAdapter
+
+                dbElemento.recuperar(args.listaID.toString(), ::recuperaElementosEdit)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    /**
+     * Metodos para alterar listas
+     */
     fun subirElemento(posicion: Int) : Boolean {
         //Si hay elementos, la posicion es mayor de 0 (que no este en el prier cuadro)
         //y que lal posicion no sea la ultima casilla
@@ -198,28 +237,6 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
         elemento.hecho = !elemento.hecho
         dbElemento.insertar(elemento)
         adapter.notifyDataSetChanged()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_tareas, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.opcLista -> {
-                findNavController().navigate(R.id.action_tareas_to_fragmentCompartirLista)
-                true
-            }
-            R.id.gestionaTareas ->{
-                editAdapter = EditaTareasAdapter(this)
-                binding.LlistaFaqsView.layoutManager = LinearLayoutManager(context)
-                binding.LlistaFaqsView.adapter = editAdapter
-
-                dbElemento.recuperar(args.listaID.toString(), ::recuperaElementosEdit)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     override fun onButtonUpClic(elemento: ElementoTarea) {

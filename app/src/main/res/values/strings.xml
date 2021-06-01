@@ -49,4 +49,5 @@
     <string name="tareaNombre">Nombre para la tarea</string>
     <string name="opciList">Opciones de lista</string>
     <string name="EditTareasView">Gestionar tareas</string>
+    <string name="extEditarTareas">Salir de vista de edición</string>
 </resources>
