@@ -1,12 +1,15 @@
 package cat.copernic.apptareas.UI
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import cat.copernic.apptareas.Modelos.ListaTareas
 import cat.copernic.apptareas.R
 import cat.copernic.apptareas.UI.ViewListas.ListaTareasAdapter
@@ -14,22 +17,34 @@ import cat.copernic.apptareas.UI.ViewListas.ListasViewModel
 import cat.copernic.apptareas.databinding.FragmentHomeBinding
 
 
-class home : Fragment(), ListaTareasAdapter.OnUserClic {
+class home : Fragment(), ListaTareasAdapter.OnUserClic, SwipeRefreshLayout.OnRefreshListener {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: ListaTareasAdapter
     private val viewModel by lazy { ViewModelProviders.of(this).get(ListasViewModel::class.java) }
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(inflater,container,false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        //Indica quien refresca
+        binding.refreshrecyclerlistas.setOnRefreshListener(this)
+        //Cambia el color del circulo de carga
+        binding.refreshrecyclerlistas.setColorScheme(R.color.azulApp, R.color.naranjaApp)
         setHasOptionsMenu(true)
 
         return binding.root
+    }
+
+    //Hace un refresco del recyclerView
+    override fun onRefresh() {
+        observeData()
+        //Para la animación del actualizando
+        binding.refreshrecyclerlistas.isRefreshing = false
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,23 +55,20 @@ class home : Fragment(), ListaTareasAdapter.OnUserClic {
         binding.recyclerListas.adapter = adapter
 
         observeData()
-
         boton()
 
-        binding.idImActualizar.setOnClickListener {
+        /* Obsoleto con el nuevo metodo refresh
+        binding.idImActualizar.setOnClickListener{
             observeData()
         }
-
+        */
     }
 
-    fun boton(){
-        binding.addLista.setOnClickListener{
-            var dialog=PopUpAñadirLista()
-
+    fun boton() {
+        binding.addLista.setOnClickListener {
+            var dialog = PopUpAñadirLista()
             getFragmentManager()?.let { it1 -> dialog.show(it1, "custom dialog") }
-
         }
-
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -70,7 +82,7 @@ class home : Fragment(), ListaTareasAdapter.OnUserClic {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             R.id.editUser -> {
                 findNavController().navigate(R.id.action_home2_to_verUsuario)
                 true
@@ -79,7 +91,7 @@ class home : Fragment(), ListaTareasAdapter.OnUserClic {
         }
     }
 
-    fun observeData(){
+    fun observeData() {
         viewModel.fetchUsersData().observe(viewLifecycleOwner, Observer {
             adapter.setListData(it)
             adapter.notifyDataSetChanged()
