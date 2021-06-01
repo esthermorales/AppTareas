@@ -15,6 +15,7 @@ import cat.copernic.apptareas.Modelos.ElementoTarea
 import cat.copernic.apptareas.Modelos.ListaTareas
 import cat.copernic.apptareas.Modelos.Usuario
 import cat.copernic.apptareas.R
+import cat.copernic.apptareas.UI.RecyclerTareas.EditaTareasAdapter
 import cat.copernic.apptareas.UI.RecyclerTareas.TareasAdapter
 import cat.copernic.apptareas.UI.ViewListas.ListaTareasAdapter
 import cat.copernic.apptareas.databinding.FragmentTareasBinding
@@ -37,6 +38,7 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic {
     private val dbElemento = DBElementoTarea()
     private lateinit var tarea: ElementoTarea
     private lateinit var adapter: TareasAdapter
+    private lateinit var editAdapter: EditaTareasAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -159,11 +161,21 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic {
                 true
             }
             R.id.gestionaTareas ->{
-                Toast.makeText(context, "La has dado a Gestion", Toast.LENGTH_SHORT).show()
+                editAdapter = EditaTareasAdapter()
+                binding.LlistaFaqsView.layoutManager = LinearLayoutManager(context)
+                binding.LlistaFaqsView.adapter = editAdapter
+
+                dbElemento.recuperar(args.listaID.toString(), ::recuperaElementosEdit)
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun recuperaElementosEdit(list : ArrayList<ElementoTarea>){
+        editAdapter.setListData(list)
+        editAdapter.notifyDataSetChanged()
+
     }
 
 }
