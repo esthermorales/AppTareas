@@ -21,38 +21,18 @@
         tools:srcCompat="@drawable/logo_apptareas" />
 
     <TextView
-        android:id="@+id/nomUsuarioView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Usuario"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    <TextView
-        android:id="@+id/emailView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/nomUsuarioView"
-        app:layout_constraintStart_toStartOf="@+id/nomUsuarioView"
-        app:layout_constraintTop_toBottomOf="@+id/nomUsuarioView" />
-
-    <TextView
         android:id="@+id/listLavel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="32dp"
         android:text="@string/strListasTl"
         android:textColor="#0B0A0A"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
