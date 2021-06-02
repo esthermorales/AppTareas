@@ -30,6 +30,7 @@ class ListaTareasAdapter(private val clickListener: ListaTareasAdapter.OnUserCli
     interface OnUserClic {
         fun onUserClickAction(listas: ListaTareas)
         fun onUserListClickAction(listas: ListaTareas)
+        fun onUserDeleteListClickAction(listas: ListaTareas)
     }
 
     inner class ListaTareasViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -37,18 +38,21 @@ class ListaTareasAdapter(private val clickListener: ListaTareasAdapter.OnUserCli
         fun bindView(element: ListaTareas) {
 
             val editar: ImageView = itemView.findViewById(R.id.idEdit)
+            val delete: ImageView = itemView.findViewById(R.id.idDelete)
             val categoria: TextView = itemView.findViewById(R.id.idListaTarea)
 
             categoria.text = element.categoria
             itemView.setOnClickListener { clickListener.onUserClickAction(element) }
 
-            itemView.idDelete.setOnClickListener{
+           /* itemView.idDelete.setOnClickListener{
 
                 db.collection("listaTareas").document(element.idLista.toString()).delete()
 
-            }
+            }*/
 
             editar.setOnClickListener { clickListener.onUserListClickAction(element) }
+
+            delete.setOnClickListener { clickListener.onUserDeleteListClickAction(element) }
         }
     }
 

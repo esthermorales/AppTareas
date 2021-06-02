@@ -163,5 +163,12 @@ class home : Fragment(), ListaTareasAdapter.OnUserClic, SwipeRefreshLayout.OnRef
 
     }
 
+    override fun onUserDeleteListClickAction(listas: ListaTareas) {
+        // itemView.idDelete.setOnClickListener{
 
+        db.collection("listaTareas").document(listas.idLista.toString()).delete()
+        // }
+
+
+    }
 }
