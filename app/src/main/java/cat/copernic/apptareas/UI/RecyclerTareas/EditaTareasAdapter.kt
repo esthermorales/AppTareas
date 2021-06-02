@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import cat.copernic.apptareas.Modelos.ElementoTarea
 import cat.copernic.apptareas.R
 
-class EditaTareasAdapter(private val clickListener: OnTareaClic):
+class EditaTareasAdapter(private val clickListener: OnTareaClic) :
     RecyclerView.Adapter<EditaTareasAdapter.EditaTareasViewHolder>() {
 
     private var dataList = ArrayList<ElementoTarea>()
@@ -43,8 +43,8 @@ class EditaTareasAdapter(private val clickListener: OnTareaClic):
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EditaTareasViewHolder {
-        val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.layout_elemento_editar, parent, false)
+        val view: View = LayoutInflater.from(parent.context)
+                .inflate(R.layout.layout_elemento_editar, parent, false)
         return EditaTareasViewHolder(view)
     }
 

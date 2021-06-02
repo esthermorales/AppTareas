@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import cat.copernic.apptareas.Comprovaciones
 import cat.copernic.apptareas.Datos.DBElementoTarea
 import cat.copernic.apptareas.Datos.DBListaTarea
 import cat.copernic.apptareas.Modelos.ElementoTarea
@@ -35,12 +36,13 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
     private val db = FirebaseFirestore.getInstance()
     private val coleccion = db.collection("listaTareas")
     private val dbLstas = DBListaTarea()
-    private lateinit var lista : ListaTareas
+    private lateinit var lista: ListaTareas
     private val dbElemento = DBElementoTarea()
     private lateinit var tarea: ElementoTarea
     private lateinit var adapter: TareasAdapter
     private lateinit var editAdapter: EditaTareasAdapter
     var elementosGenerales = ArrayList<ElementoTarea>()
+    val comprovaciones = Comprovaciones()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,21 +66,23 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
         recicler = LayoutElementoBinding.inflate(layoutInflater)
 
         lista = ListaTareas(0, "", "")
-        coleccion.whereEqualTo("idLista", identificador.toString()).limit(1).get().addOnSuccessListener {
-            for (document in it) {
-                if (it != null){
-                    val listaTareasTmp = ListaTareas(
-                        (document.data.get("idLista") as String).toInt(),
-                        document.data.get("nombre") as String, document.data.get("categoria") as String
-                    )
+        coleccion.whereEqualTo("idLista", identificador.toString()).limit(1).get()
+            .addOnSuccessListener {
+                for (document in it) {
+                    if (it != null) {
+                        val listaTareasTmp = ListaTareas(
+                            (document.data.get("idLista") as String).toInt(),
+                            document.data.get("nombre") as String,
+                            document.data.get("categoria") as String
+                        )
 
-                    lista = listaTareasTmp
+                        lista = listaTareasTmp
 
-                    vista(listaTareasTmp)
+                        vista(listaTareasTmp)
 
+                    }
                 }
             }
-        }
     }
 
 
@@ -93,7 +97,7 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
         dbElemento.recuperar(args.listaID.toString(), ::recuperaElementos)
     }
 
-    fun vista(list: ListaTareas){
+    fun vista(list: ListaTareas) {
 
         binding.idTvTitulo.text = list.categoria
 
@@ -121,17 +125,23 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
 
 
         popUp.btnCreaTarea.setOnClickListener {
-            tarea = ElementoTarea(0, popUp.editNombreTarea.toString(), 0, identificador)
+            if (comprovaciones.contieneTexto(popUp.editNombreTarea.text.toString())) {
+                tarea = ElementoTarea(0, popUp.editNombreTarea.toString(), 0, identificador)
 
-            tarea.tarea = popUp.editNombreTarea.text.toString()
+                tarea.tarea = popUp.editNombreTarea.text.toString()
 
-            dbElemento.actualizaUltimoNumero(::numeroUltimo)
+                dbElemento.actualizaUltimoNumero(::numeroUltimo)
+            } else {
+                Toast.makeText(context, "El nombre no puede estar en blnco", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
 
             dialogo.dismiss()
         }
     }
 
-    fun numeroUltimo(numero: Int){
+    fun numeroUltimo(numero: Int) {
         tarea.idElemento = numero + 1
         tarea.posicion = dbElemento.ultimoNumero + 1
 
@@ -141,7 +151,7 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
 
     }
 
-    fun recuperaElementos(list : ArrayList<ElementoTarea>){
+    fun recuperaElementos(list: ArrayList<ElementoTarea>) {
         list.sort()
         elementosGenerales = list
         adapter.setListData(list)
@@ -149,7 +159,7 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
 
     }
 
-    fun recuperaElementosEdit(list : ArrayList<ElementoTarea>){
+    fun recuperaElementosEdit(list: ArrayList<ElementoTarea>) {
         list.sort()
         elementosGenerales = list
         editAdapter.setListData(list)
@@ -173,12 +183,12 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             R.id.opcLista -> {
                 findNavController().navigate(R.id.action_tareas_to_fragmentCompartirLista)
                 true
             }
-            R.id.gestionaTareas ->{
+            R.id.gestionaTareas -> {
                 binding.btnSlEditTareas.isVisible = true
                 binding.addLista.isVisible = false
 
@@ -196,26 +206,25 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
     /**
      * Metodos para alterar listas
      */
-    fun subirElemento(posicion: Int) : Boolean {
+    fun subirElemento(posicion: Int): Boolean {
         //Si hay elementos, la posicion es mayor de 0 (que no este en el prier cuadro)
         //y que lal posicion no sea la ultima casilla
         if (elementosGenerales.size > 0 && posicion > 0 && posicion < elementosGenerales.size) {
             cambiarPosicion(elementosGenerales.get(posicion), elementosGenerales.get(posicion - 1))
             return true
-        }else
+        } else
             return false
     }
 
-    fun bajarElemento(posicion: Int) : Boolean {
+    fun bajarElemento(posicion: Int): Boolean {
         //Si hay elementos, la posicion es mayor de 0 (que no este en el prier cuadro)
         //y que lal posicion no sea la ultima casilla
         if (elementosGenerales.size > 0 && posicion >= 0 && posicion < elementosGenerales.size - 1) {
             cambiarPosicion(elementosGenerales.get(posicion), elementosGenerales.get(posicion + 1))
             return true
-        }else
+        } else
             return false
     }
-
 
 
     // Metodos Heredados
@@ -243,7 +252,7 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
         val indice = elementosGenerales.indexOf(elemento)
         val continua = subirElemento(indice)
 
-        if (continua){
+        if (continua) {
             dbElemento.insertar(elementosGenerales.get(indice))
             dbElemento.insertar(elementosGenerales.get(indice - 1))
 
@@ -255,7 +264,7 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
         val indice = elementosGenerales.indexOf(elemento)
         val continua = bajarElemento(indice)
 
-        if (continua){
+        if (continua) {
             dbElemento.insertar(elementosGenerales.get(indice))
             dbElemento.insertar(elementosGenerales.get(indice + 1))
 
@@ -264,7 +273,6 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
     }
 
     override fun onButtonDelClic(elemento: ElementoTarea) {
-        println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + elemento.idElemento)
         db.collection("elemento").document(elemento.idElemento.toString()).delete()
         dbElemento.recuperar(args.listaID.toString(), ::recuperaElementosEdit)
     }
