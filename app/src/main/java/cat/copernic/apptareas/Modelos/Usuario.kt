@@ -1,6 +1,6 @@
 package cat.copernic.apptareas.Modelos
 
-class Usuario(var email: String, var nombre: String? = null): Comparable<Usuario> {
+class Usuario(var email: String, var nombre: String? = null) : Comparable<Usuario> {
     //El nombre puede ser null, porque al iniciar solo pedimos el mail.
 
     /**
@@ -37,11 +37,11 @@ class Usuario(var email: String, var nombre: String? = null): Comparable<Usuario
      * Metodo sobreescrito para ordenar
      */
     override fun compareTo(other: Usuario): Int {
-        if(this.email > other.email){
+        if (this.email > other.email) {
             return 1
-        }else if (this.email < other.email){
+        } else if (this.email < other.email) {
             return -1
-        }else{
+        } else {
             return 0
         }
     }

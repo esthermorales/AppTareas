@@ -40,23 +40,26 @@ class VerUsuario : Fragment() {
         correo = user!!.email.toString()
 
         updateUI()
-        binding.guardarUsuario.setOnClickListener{
-            if (!comprovaciones.validaCorreo(binding.editCorreo.text.toString())){
+        binding.guardarUsuario.setOnClickListener {
+            if (!comprovaciones.validaCorreo(binding.editCorreo.text.toString())) {
                 texto += "El correo electronico no es valido"
             }
 
-            if(!comprovaciones.validaClave(binding.editPassword.text.toString()) && comprovaciones.contieneTexto(binding.editPassword.text.toString())){
+            if (!comprovaciones.validaClave(binding.editPassword.text.toString()) && comprovaciones.contieneTexto(
+                    binding.editPassword.text.toString()
+                )
+            ) {
                 if (!texto.equals(""))
                     texto += System.getProperty("line.separator")
 
                 texto += "La contraseña introducida no es valida"
-            }else if (comprovaciones.contieneTexto(binding.editPassword.text.toString())) {
+            } else if (comprovaciones.contieneTexto(binding.editPassword.text.toString())) {
                 contraseña = true
             }
 
-            if(!texto.equals("")){
+            if (!texto.equals("")) {
                 missatgeEmergent(texto)
-            }else{
+            } else {
                 texto = "Tu nuevo correo es " + binding.editCorreo.text.toString()
                 missatgeEmergent(texto)
                 correo = binding.editCorreo.text.toString()
@@ -68,7 +71,7 @@ class VerUsuario : Fragment() {
                         }
                     }
 
-                if (contraseña){
+                if (contraseña) {
                     user!!.updatePassword(binding.editPassword.text.toString())
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
@@ -85,7 +88,7 @@ class VerUsuario : Fragment() {
         }
     }
 
-    fun updateUI(){
+    fun updateUI() {
         binding.editCorreo.setText(correo)
         binding.editPassword.setText("")
     }

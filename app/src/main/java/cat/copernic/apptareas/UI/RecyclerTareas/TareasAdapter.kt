@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import cat.copernic.apptareas.Modelos.ElementoTarea
 import cat.copernic.apptareas.R
 
-class TareasAdapter(private val clickListener: OnTareaClic):
+class TareasAdapter(private val clickListener: OnTareaClic) :
     RecyclerView.Adapter<TareasAdapter.TareasViewHolder>() {
 
     private var dataList = ArrayList<ElementoTarea>()

@@ -1,10 +1,10 @@
 package cat.copernic.apptareas.Modelos
 
 
-    class ListaTareas(
+class ListaTareas(
     var idLista: Int,
-    var nombre: String="",
-    var categoria: String="",
+    var nombre: String = "",
+    var categoria: String = "",
     var elementos: ArrayList<ElementoTarea>? = null,
     var propietario: Usuario? = null,
     var compartido: ArrayList<Usuario>? = null
@@ -17,9 +17,9 @@ package cat.copernic.apptareas.Modelos
 
     }
 
-        //constructor() : this(idLista)
+    //constructor() : this(idLista)
 
-        /**
+    /**
      * Metodo para comparar la lista por el id
      */
     override fun equals(other: Any?): Boolean {
@@ -31,7 +31,7 @@ package cat.copernic.apptareas.Modelos
         if (this.nombre.equals(other.nombre)) return true
         else return false*/
         other as ListaTareas
-        if(this.idLista == other.idLista) return true
+        if (this.idLista == other.idLista) return true
         else return false
     }
 

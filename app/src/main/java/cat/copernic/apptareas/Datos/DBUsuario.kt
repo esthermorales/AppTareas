@@ -28,8 +28,9 @@ class DBUsuario {
     ) {
         //Recupera los datos del cache por si no tiene conexión
         coleccion.get().addOnSuccessListener {
-            for (document in it){
-                val usrTmp = Usuario(document.data.get("email") as String,
+            for (document in it) {
+                val usrTmp = Usuario(
+                    document.data.get("email") as String,
                     document.data.get("nombre") as String
                 )
                 listaUsuarios.add(usrTmp)

@@ -44,7 +44,7 @@ class EditaTareasAdapter(private val clickListener: OnTareaClic) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EditaTareasViewHolder {
         val view: View = LayoutInflater.from(parent.context)
-                .inflate(R.layout.layout_elemento_editar, parent, false)
+            .inflate(R.layout.layout_elemento_editar, parent, false)
         return EditaTareasViewHolder(view)
     }
 

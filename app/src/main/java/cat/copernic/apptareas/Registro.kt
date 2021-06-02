@@ -1,7 +1,5 @@
 package cat.copernic.apptareas
 
-
-
 import android.content.Intent
 import android.graphics.Color.parseColor
 import android.net.Uri
@@ -45,14 +43,12 @@ class Registro : AppCompatActivity() {
             }
         }
 
-        binding.btnLey.setOnClickListener{
+        binding.btnLey.setOnClickListener {
             val url: String = "https://www.boe.es/buscar/pdf/2018/BOE-A-2018-16673-consolidado.pdf"
             val uri: Uri = Uri.parse(url)
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
         }
-
-
 
         registreUsuari()
     }
@@ -85,9 +81,8 @@ class Registro : AppCompatActivity() {
                     timer.schedule(timerTask { nextScreen() }, 2000)
 
 
-
-                   // val intent = Intent(this, VistaUI::class.java)
-                   // startActivity(intent)
+                    // val intent = Intent(this, VistaUI::class.java)
+                    // startActivity(intent)
 
                 } else {
                     mensajeEmergente("Error", "Error en la autentificación")
@@ -95,10 +90,11 @@ class Registro : AppCompatActivity() {
                 }
             }
     }
+
     private fun registreUsuari() {
 
-     binding.idBtnRegistro.setOnClickListener() {
-      if (!binding.idEtEmail.text.isEmpty() && !binding.idEtPassword.text.isEmpty() && !binding.idEtConfPass.text.isEmpty()) {
+        binding.idBtnRegistro.setOnClickListener() {
+            if (!binding.idEtEmail.text.isEmpty() && !binding.idEtPassword.text.isEmpty() && !binding.idEtConfPass.text.isEmpty()) {
                 if (binding.idEtPassword.text.toString()
                         .equals(binding.idEtConfPass.text.toString())
                 ) {
@@ -125,7 +121,7 @@ class Registro : AppCompatActivity() {
         }
     }
 
-    private fun nextScreen(){
+    private fun nextScreen() {
         val intent = Intent(this, VistaUI::class.java)
         startActivity(intent)
     }

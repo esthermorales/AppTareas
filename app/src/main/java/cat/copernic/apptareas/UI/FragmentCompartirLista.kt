@@ -19,16 +19,16 @@ import org.jetbrains.annotations.Nls
 class FragmentCompartirLista : Fragment() {
     var idDeLaLista = 1
     private lateinit var binding: FragmentCompartirListaBinding
-            private val db = FirebaseFirestore.getInstance()
+    private val db = FirebaseFirestore.getInstance()
     private val coleccion = db.collection("compartido")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.i("Jose","Estoy aqui")
+        Log.i("Jose", "Estoy aqui")
         val dbcompartido = DBCompartido()
 
-        Log.i("Jose","Ahora aqui")
+        Log.i("Jose", "Ahora aqui")
 
     }
 
@@ -42,9 +42,12 @@ class FragmentCompartirLista : Fragment() {
         //Al hacer clic al añadir usuario
         binding.addUser.setOnClickListener {
             //Si tiene contenido
-            if (!binding.editTextTextEmailAddress.text.equals("")){
+            if (!binding.editTextTextEmailAddress.text.equals("")) {
                 //Inserta al usuario en la db
-                dbcompartido.insertarMinimalista(idDeLaLista,binding.editTextTextEmailAddress.text.toString())
+                dbcompartido.insertarMinimalista(
+                    idDeLaLista,
+                    binding.editTextTextEmailAddress.text.toString()
+                )
                 //Limpia el txt
                 var limpia = ""
                 binding.editTextTextEmailAddress.text = null
@@ -61,16 +64,18 @@ class FragmentCompartirLista : Fragment() {
 
 
 
-        Log.i("Jose","Estoy en este punto")
+        Log.i("Jose", "Estoy en este punto")
         coleccion.whereEqualTo("listaTareas", idDeLaLista.toString()).get().addOnSuccessListener {
             for (document in it) {
-                if (it != null){
-                    Log.i("Jose",document.data.get("email") as String)
-                    if (binding.multilineaUsuers.text.equals("")){
+                if (it != null) {
+                    Log.i("Jose", document.data.get("email") as String)
+                    if (binding.multilineaUsuers.text.equals("")) {
                         binding.multilineaUsuers.setText(document.data.get("email") as String)
-                    }else{
-                        binding.multilineaUsuers.setText( binding.multilineaUsuers.text.toString()
-                                + "\n" + document.data.get("email") as String)
+                    } else {
+                        binding.multilineaUsuers.setText(
+                            binding.multilineaUsuers.text.toString()
+                                    + "\n" + document.data.get("email") as String
+                        )
                     }
 
                 }

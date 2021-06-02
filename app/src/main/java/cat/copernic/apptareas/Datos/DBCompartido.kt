@@ -40,44 +40,42 @@ class DBCompartido {
     }
 
 
-
-fun recuperar(lista: ArrayList<ListaTareas>, dostuff: (listaa: ArrayList<String>) -> Unit) {
-    var listaEmailString = ArrayList<String>()
-    coleccion.get().addOnSuccessListener {
-        for (document in it) {
-            for (lis in lista) {
-                var numId: String = document.get("listaTareas") as String
-                if (numId.toInt() == lis.idLista) {
-                    //si el documento es igual a la lista
-                    listaEmailString.add(document.get("email") as String)
+    fun recuperar(lista: ArrayList<ListaTareas>, dostuff: (listaa: ArrayList<String>) -> Unit) {
+        var listaEmailString = ArrayList<String>()
+        coleccion.get().addOnSuccessListener {
+            for (document in it) {
+                for (lis in lista) {
+                    var numId: String = document.get("listaTareas") as String
+                    if (numId.toInt() == lis.idLista) {
+                        //si el documento es igual a la lista
+                        listaEmailString.add(document.get("email") as String)
+                    }
+                    ejecutarCodigo(lis.idLista, listaEmailString)
+                    //Para ejecutar de manera remota, recibe un arrayList con el mail
+                    dostuff(listaEmailString)
+                    listaEmailString.clear()
                 }
-                ejecutarCodigo(lis.idLista, listaEmailString)
-                //Para ejecutar de manera remota, recibe un arrayList con el mail
-                dostuff(listaEmailString)
-                listaEmailString.clear()
-            }
 
+            }
         }
     }
-}
 
-/**
- * Codigo a ejecutar
- */
-fun ejecutarCodigo(idLista: Int, emailsUsuarios: ArrayList<String>) {
-    mostrar(idLista, emailsUsuarios)
+    /**
+     * Codigo a ejecutar
+     */
+    fun ejecutarCodigo(idLista: Int, emailsUsuarios: ArrayList<String>) {
+        mostrar(idLista, emailsUsuarios)
 
 
-}
+    }
 
-//Ejemplo
-fun mostrar(int: Int, texto: ArrayList<String>) {
-    println("Compartido en " + int)
-    for (tx in texto)
-        println("-> " + texto)
+    //Ejemplo
+    fun mostrar(int: Int, texto: ArrayList<String>) {
+        println("Compartido en " + int)
+        for (tx in texto)
+            println("-> " + texto)
 
-}
-
+    }
 
 
 }

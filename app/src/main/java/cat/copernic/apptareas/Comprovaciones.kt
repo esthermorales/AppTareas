@@ -9,7 +9,8 @@ class Comprovaciones {
     }
 
     fun validaCorreo(correo: String): Boolean {
-        val pattern: Pattern = Pattern.compile("^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+.[A-Za-z0-9]+")
+        val pattern: Pattern =
+            Pattern.compile("^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+.[A-Za-z0-9]+")
         return pattern.matcher(correo).matches()
     }
 

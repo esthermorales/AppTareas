@@ -17,14 +17,12 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class PopUpAñadirLista: DialogFragment() {
+class PopUpAñadirLista : DialogFragment() {
 
-    private  var _binding: FragmentAnadirListaBinding?=null
+    private var _binding: FragmentAnadirListaBinding? = null
     private val binding get() = _binding!!
-    lateinit  var listaTareas : ListaTareas
-    var dbLista= DBListaTarea()
-
-
+    lateinit var listaTareas: ListaTareas
+    var dbLista = DBListaTarea()
 
     private lateinit var auth: FirebaseAuth
     //private var mDatabase: DatabaseReference? = null
@@ -41,10 +39,10 @@ class PopUpAñadirLista: DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding =FragmentAnadirListaBinding.inflate(inflater, container, false)
+        _binding = FragmentAnadirListaBinding.inflate(inflater, container, false)
 
 
-        listaTareas=ListaTareas(0)
+        listaTareas = ListaTareas(0)
 
 
         binding.idBtnAnadirL.setOnClickListener {
@@ -62,18 +60,18 @@ class PopUpAñadirLista: DialogFragment() {
                 }
 
             } else {
-                var fire=  Firebase.auth.currentUser
-                var usuario=Usuario(fire.email)
+                var fire = Firebase.auth.currentUser
+                var usuario = Usuario(fire.email)
                 println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + usuario.email)
 
                 //Toast.makeText(activity,"${dbLista.ultimoNumero}",Toast.LENGTH_LONG).show();
 
-               //listaTareas.idLista=7
+                //listaTareas.idLista=7
                 listaTareas.categoria = binding.editTextTextPersonName2.text.toString()
                 listaTareas.nombre = binding.editTextTextPersonName3.text.toString()
-                listaTareas.propietario=usuario
+                listaTareas.propietario = usuario
 
-                dbLista.actualizaUltimoNumero (::ultimo)
+                dbLista.actualizaUltimoNumero(::ultimo)
 
                 binding.editTextTextPersonName2.setText("")
                 binding.editTextTextPersonName3.setText("")
@@ -84,11 +82,11 @@ class PopUpAñadirLista: DialogFragment() {
 
         }
 
-        binding.idButonCancelar .setOnClickListener{
+        binding.idButonCancelar.setOnClickListener {
             dismiss()
         }
 
-        var view= binding.root
+        var view = binding.root
         return view
     }
 
@@ -98,7 +96,7 @@ class PopUpAñadirLista: DialogFragment() {
         _binding = null
     }
 
-    fun ultimo(num:Int){
+    fun ultimo(num: Int) {
         listaTareas.idLista = num + 1
         dbLista.insertar(listaTareas)
 

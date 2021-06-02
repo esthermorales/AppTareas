@@ -136,7 +136,6 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
                     .show()
             }
 
-
             dialogo.dismiss()
         }
     }

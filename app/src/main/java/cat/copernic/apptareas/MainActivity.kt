@@ -24,11 +24,13 @@ import cat.copernic.apptareas.UI.VistaUI
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
+
     //-- Esta variable se le tiene que pasar a DBUsuario para recuperar los datos de la db
     //En el mismo instante no esta llena
     var usuarios = ArrayList<Usuario>()
     var listtar = ArrayList<ListaTareas>()
     var elemnts = ArrayList<ElementoTarea>()
+
     //--
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 */
-        binding.idTvRegistrarse.setOnClickListener{
+        binding.idTvRegistrarse.setOnClickListener {
             val intent = Intent(this, Registro::class.java)
             startActivity(intent)
         }
@@ -132,7 +134,6 @@ class MainActivity : AppCompatActivity() {
         test.recuperarContenido()
         println("--------------------------->")
         //recuperarTest*/
-
 
 
         //*************************************************

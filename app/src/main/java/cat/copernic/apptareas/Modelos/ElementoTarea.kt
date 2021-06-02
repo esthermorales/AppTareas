@@ -11,7 +11,6 @@ class ElementoTarea(
 
 ) : Comparable<ElementoTarea> {
 
-
     override fun toString(): String {
         return "ElementoTarea [idElemento: $idElemento, tarea: $tarea, hecho: $hecho, editable: $editable, subtarea: ${subTarea?.nombre}, posicion: $posicion]"
     }
@@ -26,14 +25,17 @@ class ElementoTarea(
      */
     fun toMap(): Map<String, Any> {
         var ret: Map<String, Any>
-        if (subTarea != null){
+        if (subTarea != null) {
             ret = mapOf(
                 "idElemento" to idElemento.toString(),
-                "tarea" to tarea, "subTarea" to subTarea?.idLista.toString(), "posicion" to posicion.toString(),
-                "padre" to padre.toString(), "hecho" to hecho, "editable" to editable
+                "tarea" to tarea,
+                "subTarea" to subTarea?.idLista.toString(),
+                "posicion" to posicion.toString(),
+                "padre" to padre.toString(),
+                "hecho" to hecho,
+                "editable" to editable
             )
-        }
-        else{
+        } else {
             ret = mapOf(
                 "idElemento" to idElemento.toString(),
                 "tarea" to tarea, "posicion" to posicion.toString(),

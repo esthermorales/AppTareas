@@ -26,7 +26,7 @@ class VistaUI : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         var id = item.itemId
 
-        if (id == R.id.cierreSesion){
+        if (id == R.id.cierreSesion) {
             Firebase.auth.signOut()
             val toInit = Intent(this, MainActivity::class.java)
             startActivity(toInit)
@@ -35,8 +35,7 @@ class VistaUI : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return Navigation.findNavController(this,
-            R.id.fragmentContainerView)
+        return Navigation.findNavController(this, R.id.fragmentContainerView)
             .navigateUp() || super.onSupportNavigateUp()
     }
 }

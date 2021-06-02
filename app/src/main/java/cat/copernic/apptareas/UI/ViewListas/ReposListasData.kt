@@ -9,13 +9,14 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class ReposListasData {
 
-    fun getListasData() : LiveData<MutableList<ListaTareas>> {
+    fun getListasData(): LiveData<MutableList<ListaTareas>> {
         val mutableData = MutableLiveData<MutableList<ListaTareas>>()
         val user = FirebaseAuth.getInstance().currentUser?.email
         Log.e("TestLog", user.toString())
-        FirebaseFirestore.getInstance().collection("listaTareas").whereEqualTo("propietario",user.toString()).get().addOnSuccessListener { doc ->
+        FirebaseFirestore.getInstance().collection("listaTareas")
+            .whereEqualTo("propietario", user.toString()).get().addOnSuccessListener { doc ->
             val listData = mutableListOf<ListaTareas>()
-            for (document in doc){
+            for (document in doc) {
                 val idLista = (document.get("idLista") as String).toInt()
                 val categoria = document.getString("categoria")
                 val nombre = document.getString("nombre")
@@ -27,7 +28,6 @@ class ReposListasData {
         }
         return mutableData
     }
-
 
 
 }

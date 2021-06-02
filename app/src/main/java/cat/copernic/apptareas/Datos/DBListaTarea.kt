@@ -13,7 +13,7 @@ class DBListaTarea {
 
     //public var ultimoNumero = 0
     private lateinit var usuariosTmp: ArrayList<Usuario>
-    var ultimoNumero  = 0
+    var ultimoNumero = 0
 
 
     /**
@@ -63,7 +63,10 @@ class DBListaTarea {
     /**
      * Versión 2 de recuperar para no alterar la funcion recuperar en caso de que se este utilizando la otra
      */
-    fun recuperar_v2(lista: ArrayList<ListaTareas>, dostuff: (users: ArrayList<ListaTareas>) -> Unit){
+    fun recuperar_v2(
+        lista: ArrayList<ListaTareas>,
+        dostuff: (users: ArrayList<ListaTareas>) -> Unit
+    ) {
         coleccion.get(Source.CACHE).addOnSuccessListener {
             for (document in it) {
                 val listaTareasTmp = ListaTareas(
@@ -118,7 +121,7 @@ class DBListaTarea {
      * Utilizar esta función para llamar la dbusuarios
      * en esta funcion ya se deberian haber recuperado el ArrayList de usuarios
      */
-    fun conUsuariosRecuperados(usuarios :ArrayList<Usuario>){
+    fun conUsuariosRecuperados(usuarios: ArrayList<Usuario>) {
         var lista = ArrayList<ListaTareas>()
         coleccion.get().addOnSuccessListener {
             for (document in it) {
@@ -147,7 +150,7 @@ class DBListaTarea {
      * Metodo recuperar usuario
      * Este es el metodo que hay que llamar para recuperar!!!
      */
-    fun recuperarContenido(){
+    fun recuperarContenido() {
         var usu = DBUsuario()
         usu.recuperar(usuarios, ::conUsuariosRecuperados)
     }
@@ -155,7 +158,7 @@ class DBListaTarea {
     /**
      * Ejemplo para testear, eliminar despues
      */
-    fun mostrar(mues : ArrayList<ListaTareas>){
+    fun mostrar(mues: ArrayList<ListaTareas>) {
         for (lista in mues)
             println(lista.toString())
     }
@@ -164,7 +167,7 @@ class DBListaTarea {
      * !!!!!!
      * Aqui se pueden lanzar los metodos, lista contiene los elementos
      */
-    fun ejecutarConDatosRecuperados(lista: ArrayList<ListaTareas>){
+    fun ejecutarConDatosRecuperados(lista: ArrayList<ListaTareas>) {
         //Ejemplo para probar el funcionamiento
         //mostrar(lista)
         //-- Recupera los datos de la db Elementos
@@ -174,11 +177,11 @@ class DBListaTarea {
         //Recupera compartido
         var compartido = DBCompartido()
         println("----------------------------- test ---------------------------")
-        compartido.recuperar(lista,::nothing_)
+        compartido.recuperar(lista, ::nothing_)
 
     }
 
-    fun enviaDatos(lista: ArrayList<ListaTareas>) : ArrayList<ListaTareas> {
+    fun enviaDatos(lista: ArrayList<ListaTareas>): ArrayList<ListaTareas> {
         var ret = lista
 
         return ret
@@ -187,6 +190,6 @@ class DBListaTarea {
     /**
      * Unicamente porque pide el parametro la función
      */
-    fun nothing_(a: ArrayList<String>){}
+    fun nothing_(a: ArrayList<String>) {}
 
 }
