@@ -38,7 +38,10 @@ class ListaTareasAdapter(private val clickListener: ListaTareasAdapter.OnUserCli
 
             categoria.text = element.categoria
             itemView.setOnClickListener { clickListener.onUserClickAction(element) }
+            /* itemView.idDelete.setOnClickListener{
 
+               db.collection("listaTareas").document(element.idLista.toString()).delete()
+          }*/
             editar.setOnClickListener { clickListener.onUserListClickAction(element) }
 
             delete.setOnClickListener { clickListener.onUserDeleteListClickAction(element) }

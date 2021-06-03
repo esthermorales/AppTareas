@@ -22,7 +22,6 @@ class PopUpAñadirLista : DialogFragment() {
     private val binding get() = _binding!!
     lateinit var listaTareas: ListaTareas
     private var dbLista = DBListaTarea()
-    private lateinit var auth: FirebaseAuth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,22 +44,19 @@ class PopUpAñadirLista : DialogFragment() {
 
         binding.idBtnAnadirL.setOnClickListener {
 
-            if (binding.editTextTextPersonName2.equals("") || binding.editTextTextPersonName3.equals(
-                    ""
-                )
-            ) {
+           if (binding.editTextTextPersonName2.equals("") || binding.editTextTextPersonName3.equals("")) {
                 //validacion()
 
                 if (binding.editTextTextPersonName2.equals("")) {
                     binding.editTextTextPersonName2.setError("Required")
-                } else if (binding.editTextTextPersonName3.equals("")) {
+                }
+                if (binding.editTextTextPersonName3.equals("")) {
                     binding.editTextTextPersonName3.setError("Required")
                 }
 
             } else {
                 var fire = Firebase.auth.currentUser
                 var usuario = Usuario(fire.email)
-                println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + usuario.email)
 
                 listaTareas.categoria = binding.editTextTextPersonName2.text.toString()
                 listaTareas.nombre = binding.editTextTextPersonName3.text.toString()
@@ -71,9 +67,9 @@ class PopUpAñadirLista : DialogFragment() {
                 binding.editTextTextPersonName2.setText("")
                 binding.editTextTextPersonName3.setText("")
 
+                dismiss()
             }
-
-            dismiss()
+            
         }
 
         binding.idButonCancelar.setOnClickListener {

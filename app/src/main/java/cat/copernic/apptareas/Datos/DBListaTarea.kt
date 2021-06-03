@@ -13,14 +13,10 @@ class DBListaTarea {
 
 
     private lateinit var usuariosTmp: ArrayList<Usuario>
-    var ultimoNumero = 0
-
 
     /**
      * Inserta una lista dentro de FireBase
      */
-    init {
-    }
 
     fun insertar(lista: ListaTareas) {
         db.collection("listaTareas").document(lista.idLista.toString()).set(lista.toMap())
