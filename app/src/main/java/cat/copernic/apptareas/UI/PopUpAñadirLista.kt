@@ -69,7 +69,7 @@ class PopUpAñadirLista : DialogFragment() {
 
                 dismiss()
             }
-            
+
         }
 
         binding.idButonCancelar.setOnClickListener {
