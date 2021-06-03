@@ -11,7 +11,7 @@ class DBListaTarea {
     private val coleccion = db.collection("listaTareas")
     private val usuarios = ArrayList<Usuario>()
 
-    //public var ultimoNumero = 0
+
     private lateinit var usuariosTmp: ArrayList<Usuario>
     var ultimoNumero = 0
 
@@ -20,13 +20,10 @@ class DBListaTarea {
      * Inserta una lista dentro de FireBase
      */
     init {
-        //Actualiza el ultimo numero
-        //actualizaUltimoNumero(::ulNum)
     }
 
     fun insertar(lista: ListaTareas) {
         db.collection("listaTareas").document(lista.idLista.toString()).set(lista.toMap())
-        //actualizaUltimoNumero(::ulNum)
     }
 
     fun recuperar(
@@ -111,11 +108,6 @@ class DBListaTarea {
         usuariosTmp = usu
     }
     //Para utilizar con el metodo anterior
-
-    //posiblemente hay que eliminar esta función
-    fun ulNum(ult: Int) {
-        //ultimoNumero = ult
-    }
 
     /**
      * Utilizar esta función para llamar la dbusuarios

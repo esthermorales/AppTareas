@@ -2,20 +2,16 @@ package cat.copernic.apptareas.UI
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import cat.copernic.apptareas.Datos.DBListaTarea
-import cat.copernic.apptareas.Modelos.ElementoTarea
 import cat.copernic.apptareas.Modelos.ListaTareas
 import cat.copernic.apptareas.Modelos.Usuario
 import cat.copernic.apptareas.R
@@ -23,14 +19,11 @@ import cat.copernic.apptareas.UI.ViewListas.ListaTareasAdapter
 import cat.copernic.apptareas.UI.ViewListas.ListasViewModel
 import cat.copernic.apptareas.databinding.FragmentAnadirListaBinding
 import cat.copernic.apptareas.databinding.FragmentHomeBinding
-import cat.copernic.apptareas.databinding.PopUpCrearTareaBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_anadir_lista.view.*
-import kotlinx.android.synthetic.main.fragment_compartir_lista.view.*
-import kotlinx.android.synthetic.main.fragment_item_listas.view.*
-import kotlinx.android.synthetic.main.pop_up_crear_tarea.view.*
+
 
 
 class home : Fragment(), ListaTareasAdapter.OnUserClic, SwipeRefreshLayout.OnRefreshListener {
@@ -164,11 +157,7 @@ class home : Fragment(), ListaTareasAdapter.OnUserClic, SwipeRefreshLayout.OnRef
     }
 
     override fun onUserDeleteListClickAction(listas: ListaTareas) {
-        // itemView.idDelete.setOnClickListener{
 
         db.collection("listaTareas").document(listas.idLista.toString()).delete()
-        // }
-
-
     }
 }

@@ -1,12 +1,10 @@
 package cat.copernic.apptareas.Datos
 
-import cat.copernic.apptareas.Modelos.ListaTareas
 import cat.copernic.apptareas.Modelos.Usuario
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlin.reflect.KFunction2
+
 
 class DBUsuario {
-    lateinit var listaUsuarios: ArrayList<Usuario>
     private val db = FirebaseFirestore.getInstance()
     private val coleccion = db.collection("usuarios")
 
@@ -37,9 +35,6 @@ class DBUsuario {
             }
             dostuff(listaUsuarios)
         }
-
     }
-
-
 }
 

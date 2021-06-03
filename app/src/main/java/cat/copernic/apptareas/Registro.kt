@@ -11,7 +11,6 @@ import cat.copernic.apptareas.UI.VistaUI
 import cat.copernic.apptareas.databinding.ActivityRegistroBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.type.Color
 import java.util.*
 import kotlin.concurrent.timerTask
 

@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import android.text.TextUtils
-import cat.copernic.apptareas.Datos.DBListaTarea
 import cat.copernic.apptareas.Modelos.ElementoTarea
 import cat.copernic.apptareas.Modelos.ListaTareas
 import cat.copernic.apptareas.Modelos.Usuario
@@ -38,23 +37,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //Botones
-        //binding.btnLogIn.setOnClickListener(this)
         binding.btnLogIn.setOnClickListener {
             //Llamada a metodos de los botones
             login(binding.txtEmail.text.toString(), binding.txtPass.text.toString())
         }
         auth = Firebase.auth
-/*
-        binding.btnRegistro.setOnClickListener(){
-            val intent = Intent(this, RegistreActivity::class.java)
-            startActivity(intent)
-        }
-*/
+
         binding.idTvRegistrarse.setOnClickListener {
             val intent = Intent(this, Registro::class.java)
             startActivity(intent)
         }
-
     }
 
     /* ja hem inicialitzat el layout però no és visible */

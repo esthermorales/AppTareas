@@ -6,15 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import cat.copernic.apptareas.Datos.DBCompartido
-import cat.copernic.apptareas.Modelos.ListaTareas
-import cat.copernic.apptareas.Modelos.Usuario
-import cat.copernic.apptareas.R
 import cat.copernic.apptareas.databinding.FragmentCompartirListaBinding
-import cat.copernic.apptareas.databinding.FragmentTareasBinding
 import com.google.firebase.firestore.FirebaseFirestore
-import org.jetbrains.annotations.Nls
 
 class FragmentCompartirLista : Fragment() {
     var idDeLaLista = 1
@@ -25,7 +19,7 @@ class FragmentCompartirLista : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.i("Jose", "Estoy aqui")
+
         val dbcompartido = DBCompartido()
 
         Log.i("Jose", "Ahora aqui")
@@ -61,9 +55,6 @@ class FragmentCompartirLista : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-
         Log.i("Jose", "Estoy en este punto")
         coleccion.whereEqualTo("listaTareas", idDeLaLista.toString()).get().addOnSuccessListener {
             for (document in it) {
@@ -83,6 +74,4 @@ class FragmentCompartirLista : Fragment() {
         }
 
     }
-
-
 }

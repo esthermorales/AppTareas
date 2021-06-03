@@ -45,5 +45,4 @@ class Usuario(var email: String, var nombre: String? = null) : Comparable<Usuari
             return 0
         }
     }
-
 }

@@ -14,10 +14,7 @@ class ListaTareas(
         if (elementos != null) {
             elementos!!.sort()
         }
-
     }
-
-    //constructor() : this(idLista)
 
     /**
      * Metodo para comparar la lista por el id
@@ -122,8 +119,6 @@ class ListaTareas(
             //se añade el usuario
             compartido?.add(usuario)
         }
-
-
     }
 
 

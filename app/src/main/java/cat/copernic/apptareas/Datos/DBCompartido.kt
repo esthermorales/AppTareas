@@ -2,8 +2,6 @@ package cat.copernic.apptareas.Datos
 
 import android.util.Log
 import cat.copernic.apptareas.Modelos.ListaTareas
-import cat.copernic.apptareas.Modelos.Usuario
-import cat.copernic.apptareas.UI.FragmentCompartirLista
 import com.google.firebase.firestore.FirebaseFirestore
 
 class DBCompartido {
@@ -65,8 +63,6 @@ class DBCompartido {
      */
     fun ejecutarCodigo(idLista: Int, emailsUsuarios: ArrayList<String>) {
         mostrar(idLista, emailsUsuarios)
-
-
     }
 
     //Ejemplo
@@ -76,6 +72,4 @@ class DBCompartido {
             println("-> " + texto)
 
     }
-
-
 }

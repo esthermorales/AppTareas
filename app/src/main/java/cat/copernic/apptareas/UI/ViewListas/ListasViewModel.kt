@@ -15,5 +15,4 @@ class ListasViewModel : ViewModel() {
         }
         return mutabledata
     }
-
 }

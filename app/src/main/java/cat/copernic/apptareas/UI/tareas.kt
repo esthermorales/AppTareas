@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.CheckBox
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
@@ -15,16 +14,13 @@ import cat.copernic.apptareas.Datos.DBElementoTarea
 import cat.copernic.apptareas.Datos.DBListaTarea
 import cat.copernic.apptareas.Modelos.ElementoTarea
 import cat.copernic.apptareas.Modelos.ListaTareas
-import cat.copernic.apptareas.Modelos.Usuario
 import cat.copernic.apptareas.R
 import cat.copernic.apptareas.UI.RecyclerTareas.EditaTareasAdapter
 import cat.copernic.apptareas.UI.RecyclerTareas.TareasAdapter
-import cat.copernic.apptareas.UI.ViewListas.ListaTareasAdapter
 import cat.copernic.apptareas.databinding.FragmentTareasBinding
 import cat.copernic.apptareas.databinding.LayoutElementoBinding
 import cat.copernic.apptareas.databinding.PopUpCrearTareaBinding
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Source
 import kotlinx.android.synthetic.main.pop_up_crear_tarea.view.*
 
 class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTareaClic {
@@ -275,5 +271,4 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
         db.collection("elemento").document(elemento.idElemento.toString()).delete()
         dbElemento.recuperar(args.listaID.toString(), ::recuperaElementosEdit)
     }
-
 }

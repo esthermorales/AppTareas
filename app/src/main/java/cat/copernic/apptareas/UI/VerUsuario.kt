@@ -7,11 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import cat.copernic.apptareas.Comprovaciones
 import cat.copernic.apptareas.Datos.DBUsuario
 import cat.copernic.apptareas.Modelos.Usuario
-import cat.copernic.apptareas.R
 import cat.copernic.apptareas.databinding.FragmentVerUsuarioBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

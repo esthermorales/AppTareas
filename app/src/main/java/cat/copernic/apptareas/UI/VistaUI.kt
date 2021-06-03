@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.navigation.Navigation
 import cat.copernic.apptareas.MainActivity
 import cat.copernic.apptareas.R

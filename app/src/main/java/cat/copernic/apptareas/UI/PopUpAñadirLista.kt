@@ -13,7 +13,6 @@ import cat.copernic.apptareas.Modelos.ListaTareas
 import cat.copernic.apptareas.Modelos.Usuario
 import cat.copernic.apptareas.databinding.FragmentAnadirListaBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -22,10 +21,9 @@ class PopUpAñadirLista : DialogFragment() {
     private var _binding: FragmentAnadirListaBinding? = null
     private val binding get() = _binding!!
     lateinit var listaTareas: ListaTareas
-    var dbLista = DBListaTarea()
-
+    private var dbLista = DBListaTarea()
     private lateinit var auth: FirebaseAuth
-    //private var mDatabase: DatabaseReference? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,9 +62,6 @@ class PopUpAñadirLista : DialogFragment() {
                 var usuario = Usuario(fire.email)
                 println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + usuario.email)
 
-                //Toast.makeText(activity,"${dbLista.ultimoNumero}",Toast.LENGTH_LONG).show();
-
-                //listaTareas.idLista=7
                 listaTareas.categoria = binding.editTextTextPersonName2.text.toString()
                 listaTareas.nombre = binding.editTextTextPersonName3.text.toString()
                 listaTareas.propietario = usuario
@@ -79,7 +74,6 @@ class PopUpAñadirLista : DialogFragment() {
             }
 
             dismiss()
-
         }
 
         binding.idButonCancelar.setOnClickListener {
@@ -99,6 +93,5 @@ class PopUpAñadirLista : DialogFragment() {
     fun ultimo(num: Int) {
         listaTareas.idLista = num + 1
         dbLista.insertar(listaTareas)
-
     }
 }

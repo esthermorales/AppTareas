@@ -3,8 +3,7 @@ package cat.copernic.apptareas.Datos
 import cat.copernic.apptareas.Modelos.ElementoTarea
 import cat.copernic.apptareas.Modelos.ListaTareas
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.Source
+
 
 class DBElementoTarea {
     private val db = FirebaseFirestore.getInstance()
@@ -14,7 +13,7 @@ class DBElementoTarea {
     var ultimoNumero: Int = 0
 
     init {
-        //actualizaUltimoNumero()
+
     }
 
     /**
@@ -24,7 +23,7 @@ class DBElementoTarea {
 
     fun insertar(elemento: ElementoTarea) {
         db.collection("elemento").document(elemento.idElemento.toString()).set(elemento.toMap())
-        //actualizaUltimoNumero()
+
     }
 
     /**
@@ -133,9 +132,7 @@ class DBElementoTarea {
             //code here
             //EL codigo que se ejecuta
             codigoEjecutarConDatos(list)
-
         }
-
     }
 
     /**
