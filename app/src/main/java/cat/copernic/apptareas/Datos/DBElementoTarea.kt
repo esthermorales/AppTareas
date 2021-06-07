@@ -29,10 +29,8 @@ class DBElementoTarea {
     /**
      * Recupera los dotos referentes a ElementoTarea de Firebase
      */
-    fun recuperar(
-        id: String,
-        dostuff: (users: ArrayList<ElementoTarea>) -> Unit
-    ) {
+    fun recuperar(id: String, dostuff: (users: ArrayList<ElementoTarea>) -> Unit) {
+
         var tmp: ListaTareas = ListaTareas(0, "", "")
         coleccion.whereEqualTo("padre", id).get().addOnSuccessListener {
             var list = ArrayList<ElementoTarea>()

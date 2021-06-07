@@ -32,7 +32,9 @@ class TareasAdapter(private val clickListener: OnTareaClic) :
             categoria.text = element.tarea
             check.isChecked = element.hecho
 
-            itemView.setOnClickListener { clickListener.onUserClickAction(element) }
+            itemView.setOnClickListener {
+                clickListener.onUserClickAction(element)
+            }
         }
     }
 

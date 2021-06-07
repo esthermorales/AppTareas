@@ -15,8 +15,6 @@ class ListaTareasAdapter(private val clickListener: ListaTareasAdapter.OnUserCli
     RecyclerView.Adapter<ListaTareasAdapter.ListaTareasViewHolder>() {
 
     private var dataList = mutableListOf<ListaTareas>()
-    private val db = FirebaseFirestore.getInstance()
-
 
     fun setListData(data: MutableList<ListaTareas>) {
         dataList = data
@@ -37,8 +35,12 @@ class ListaTareasAdapter(private val clickListener: ListaTareasAdapter.OnUserCli
             val categoria: TextView = itemView.findViewById(R.id.idListaTarea)
 
             categoria.text = element.categoria
+
             itemView.setOnClickListener { clickListener.onUserClickAction(element) }
-           
+            /* itemView.idDelete.setOnClickListener{
+
+               db.collection("listaTareas").document(element.idLista.toString()).delete()
+          }*/
             editar.setOnClickListener { clickListener.onUserListClickAction(element) }
 
             delete.setOnClickListener { clickListener.onUserDeleteListClickAction(element) }

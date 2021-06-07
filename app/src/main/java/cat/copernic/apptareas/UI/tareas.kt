@@ -24,7 +24,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.pop_up_crear_tarea.view.*
 
 class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTareaClic {
-
+//https://developer.android.com/guide/navigation/navigation-pass-data?hl=es
+    //https://dev4phones.wordpress.com/2019/09/16/usando-el-plugin-safe-args-para-gestionar-argumentos/
     private lateinit var binding: FragmentTareasBinding
     private lateinit var popu: PopUpCrearTareaBinding
     private lateinit var recicler: LayoutElementoBinding
@@ -128,7 +129,7 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
 
                 dbElemento.actualizaUltimoNumero(::numeroUltimo)
             } else {
-                Toast.makeText(context, "El nombre no puede estar en blnco", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "El nombre no puede estar en blanco", Toast.LENGTH_LONG)
                     .show()
             }
 
@@ -202,7 +203,7 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
      * Metodos para alterar listas
      */
     fun subirElemento(posicion: Int): Boolean {
-        //Si hay elementos, la posicion es mayor de 0 (que no este en el prier cuadro)
+        //Si hay elementos, la posicion es mayor de 0 (que no este en el primer cuadro)
         //y que lal posicion no sea la ultima casilla
         if (elementosGenerales.size > 0 && posicion > 0 && posicion < elementosGenerales.size) {
             cambiarPosicion(elementosGenerales.get(posicion), elementosGenerales.get(posicion - 1))

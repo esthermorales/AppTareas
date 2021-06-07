@@ -115,12 +115,6 @@ class home : Fragment(), ListaTareasAdapter.OnUserClic, SwipeRefreshLayout.OnRef
 
     override fun onUserListClickAction(listas: ListaTareas) {
 
-        var binding: FragmentAnadirListaBinding
-        binding = FragmentAnadirListaBinding.inflate(layoutInflater)
-
-
-
-
         popUpLista = FragmentAnadirListaBinding.inflate(layoutInflater)
         val popUp = popUpLista.root
 
@@ -135,8 +129,6 @@ class home : Fragment(), ListaTareasAdapter.OnUserClic, SwipeRefreshLayout.OnRef
 
             var fire = Firebase.auth.currentUser
             var usuario = Usuario(fire.email)
-
-            Toast.makeText(context, "ffffff", Toast.LENGTH_LONG).show()
 
             listas.categoria = popUp.editTextTextPersonName2.text.toString()
             listas.nombre = popUp.editTextTextPersonName3.text.toString()
