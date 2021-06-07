@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import cat.copernic.apptareas.Datos.DBElementoTarea
 import cat.copernic.apptareas.Datos.DBListaTarea
 import cat.copernic.apptareas.Modelos.ListaTareas
 import cat.copernic.apptareas.Modelos.Usuario
@@ -35,6 +36,7 @@ class home : Fragment(), ListaTareasAdapter.OnUserClic, SwipeRefreshLayout.OnRef
     private val viewModel by lazy { ViewModelProviders.of(this).get(ListasViewModel::class.java) }
     private val db = FirebaseFirestore.getInstance()
     private lateinit var popUpLista: FragmentAnadirListaBinding
+    private val dbElemento = DBElementoTarea()
 
     private var dbList = DBListaTarea()
 
@@ -150,6 +152,17 @@ class home : Fragment(), ListaTareasAdapter.OnUserClic, SwipeRefreshLayout.OnRef
 
     override fun onUserDeleteListClickAction(listas: ListaTareas) {
 
+        val identificador = listas.idLista
+
+        dbElemento.recuperar(identificador.toString(), ::eliminaElementos)
+
         db.collection("listaTareas").document(listas.idLista.toString()).delete()
+    }
+
+    fun eliminaElementos(elementos: ArrayList<ElementoTarea>){
+        for (elemento in 0..(elementos.size - 1)){
+            elementos.get(elemento)
+            db.collection("elemento").document(elementos.get(elemento).idElemento.toString()).delete()
+        }
     }
 }

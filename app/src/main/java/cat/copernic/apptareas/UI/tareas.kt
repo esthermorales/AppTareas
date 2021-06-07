@@ -244,6 +244,12 @@ class tareas : Fragment(), TareasAdapter.OnTareaClic, EditaTareasAdapter.OnTarea
         adapter.notifyDataSetChanged()
     }
 
+    override fun onCheckClic(tarea: ElementoTarea) {
+        tarea.hecho = !tarea.hecho
+        dbElemento.insertar(tarea)
+        adapter.notifyDataSetChanged()
+    }
+
     override fun onButtonUpClic(elemento: ElementoTarea) {
         val indice = elementosGenerales.indexOf(elemento)
         val continua = subirElemento(indice)

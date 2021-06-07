@@ -21,6 +21,7 @@ class TareasAdapter(private val clickListener: OnTareaClic) :
 
     interface OnTareaClic {
         fun onUserClickAction(elemento: ElementoTarea)
+        fun onCheckClic(tarea: ElementoTarea)
     }
 
     inner class TareasViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -35,6 +36,8 @@ class TareasAdapter(private val clickListener: OnTareaClic) :
             itemView.setOnClickListener {
                 clickListener.onUserClickAction(element)
             }
+            itemView.setOnClickListener { clickListener.onUserClickAction(element) }
+            check.setOnClickListener { clickListener.onCheckClic(element) }
         }
     }
 
